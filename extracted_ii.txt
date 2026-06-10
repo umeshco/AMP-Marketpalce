@@ -1,0 +1,1 @@
+{"admin@authorityplacement.com":{hash:"a591025453039e5a5b536d48a1540cb8e92ab93673b42c21f2a3da804d341009",user:{role:"admin",name:"Admin",email:"admin@authorityplacement.com",id:"admin"}

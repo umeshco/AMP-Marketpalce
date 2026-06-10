@@ -1,0 +1,70 @@
+function Kp({onBack:e}){const[t,n]=T.useState(null),r=[{id:1,emoji:"🔗",category:"Link Building",readTime:"12 min",date:"June 1, 2026",author:"Authority Media Team",title:"The Complete Guide to Guest Posting in 2026: What Works, What Doesn't",excerpt:"Guest posting remains one of the most powerful white-hat link building strategies. In this comprehensive guide, we cover finding the right sites, crafting pitches that get accepted, and maximising the SEO value of every link.",content:`Guest posting in 2026 is more competitive than ever — but also more rewarding for those who do it right. Google's algorithm continues to value high-quality editorial links from authoritative, relevant websites. Here's a complete breakdown of what you need to know.
+
+WHY GUEST POSTS STILL DELIVER RESULTS
+
+Despite years of predictions about their decline, guest posts on genuine, high-authority sites remain one of the most reliable ways to build domain authority. The key distinction in 2026 is quality: a single link from a DA 65 site in your exact niche will consistently outperform 20 links from DA 20 general sites.
+
+Google's systems have become significantly better at evaluating link quality based on: the editorial standards of the linking site, topical relevance between the source and target, natural anchor text distribution, and the genuine traffic and engagement of the linking page.
+
+FINDING THE RIGHT SITES
+
+Use Authority Media Placement's advanced filters to sort by niche, DA, DR, and traffic. Target sites with DA 40+, genuine organic traffic (15,000+/month), and a clear editorial voice. Avoid sites that publish any content for a price — look for publishers who maintain genuine standards.
+
+CRAFTING A WINNING PITCH
+
+Personalise every pitch. Reference specific articles on the target site. Propose 3 topic ideas that genuinely fit their audience. Show your expertise with links to previous published work. Keep your pitch concise — editors are busy and receive dozens of requests weekly.
+
+WRITING CONTENT THAT GETS PUBLISHED AND SHARED
+
+Write for the site's audience, not for your backlink. Aim for 1,200–2,500 words with genuine depth. Include original research, current statistics, and actionable advice. The backlink should feel natural within the flow of the article — not forced or promotional.
+
+MEASURING ROI CORRECTLY
+
+Track your results in Ahrefs over 3–6 months: monitor referring domain growth, organic keyword rankings for your target pages, and organic traffic trends. Guest posting is a long-term strategy — expect to see meaningful results after 3–6 months of consistent effort.`},{id:2,emoji:"📊",category:"SEO Strategy",readTime:"8 min",date:"May 20, 2026",author:"Priya Sharma",title:"DA vs DR: Which SEO Metric Should Guide Your Link Building in 2026?",excerpt:"Moz DA and Ahrefs DR both claim to predict ranking power — but they measure very different things. Here's a clear, practical breakdown of which metric to trust for different link building decisions.",content:`If you've spent time in the SEO world, you've encountered both Domain Authority (DA) from Moz and Domain Rating (DR) from Ahrefs. Both are widely used — and widely misunderstood. Here's what you actually need to know.
+
+WHAT DOMAIN AUTHORITY (DA) MEASURES
+
+Moz's Domain Authority predicts how likely a domain is to rank well in search results, based on its overall backlink profile quality. It uses a logarithmic 1–100 scale and considers linking root domains, link quality signals, and spam factors. DA is updated regularly as Moz re-crawls the web.
+
+WHAT DOMAIN RATING (DR) MEASURES
+
+Ahrefs' Domain Rating measures the strength of a website's backlink profile relative to all other websites in Ahrefs' database. It focuses specifically on: the number of unique domains linking to the site, and the DR of those linking domains. DR is a purer measure of raw link equity — it doesn't factor in spam or relevance signals.
+
+KEY PRACTICAL DIFFERENCES
+
+DA tends to be more sensitive to link diversity and can drop if a site accumulates many low-quality links, even with high quantity. DR tends to be more stable and rises with raw linking domain quantity from high-DR sources. A site can have high DR but lower DA if its links come from a narrow set of sources.
+
+WHICH TO USE FOR LINK BUILDING DECISIONS
+
+For topical authority campaigns: prioritise niche relevance + DA. A high-DA site in your exact niche carries more ranking power than a high-DR general site. For raw link equity and PageRank flow: prioritise DR. Sites with high DR pass more raw link authority regardless of niche.
+
+THE HONEST TRUTH ABOUT BOTH METRICS
+
+Neither DA nor DR is a Google metric — they are third-party approximations built on incomplete crawl data. The best real predictor of link value remains: genuine organic traffic + clear editorial standards + topical relevance to your target page. Use metrics as a filter, not as the final word.`},{id:3,emoji:"💰",category:"Publisher Tips",readTime:"10 min",date:"May 5, 2026",author:"Amit Singh",title:"How to Earn $2,000–$5,000/Month from Your Blog with Sponsored Content",excerpt:"Real numbers from real publishers. Learn the exact strategies our top earners use to consistently generate income from sponsored posts without compromising their editorial integrity or reader trust.",content:`Our top-performing publishers earn between $2,000 and $8,000 per month from sponsored content. Here's an honest breakdown of how they do it — and how you can replicate their approach.
+
+PRICE YOUR SITE FOR WHAT IT'S WORTH
+
+The single biggest mistake new publishers make is undercharging. Here's a realistic pricing guide based on 2026 market rates on Authority Media Placement:
+
+DA 20–35, 5,000–20,000 traffic/month: $50–$120 per post
+DA 35–50, 20,000–60,000 traffic/month: $120–$250 per post
+DA 50–65, 60,000–150,000 traffic/month: $250–$500 per post
+DA 65+, 150,000+ traffic/month: $500–$1,500 per post
+
+If your site has a high-value niche (finance, legal, healthcare, SaaS), add 30–50% to these figures.
+
+MAINTAIN EDITORIAL QUALITY — IT'S YOUR BRAND
+
+The publishers who earn the most long-term are those who never compromise on content quality. Every sponsored post should genuinely serve your audience. If the content isn't good enough to publish as an organic article, don't publish it for a sponsor either. This maintains reader trust and keeps your traffic growing — which in turn keeps your prices high.
+
+DIVERSIFY YOUR CONTENT OFFERING
+
+Don't just offer guest posts. Offer: link insertions into existing high-traffic articles (often easier and more valuable for advertisers); category-specific placements for premium niches; homepage or sidebar link placements; and social media promotion bundles with your sponsored posts. More products = more revenue streams.
+
+KEEP YOUR METRICS GROWING
+
+A site with growing DA, DR, and traffic can increase prices every 6 months. Publish 4–8 original articles per month alongside your sponsored content. Use solid on-page SEO, internal linking, and content clusters to grow organic rankings consistently.
+
+RESPOND FAST AND DELIVER ON TIME
+
+Publishers with the fastest response rates and delivery times receive the most repeat orders and the best reviews. Set up push notifications for new orders. Respond within 2 hours during business hours. Deliver content at least 24 hours before your stated deadline. These habits compound into significantly higher monthly earnings.`},{id:4,emoji:"🎯",category:"Content Strategy",readTime:"9 min",date:"April 18, 2026",author:"Authority Media Team",title:"10 Content Types With the Highest Acceptance Rates on Premium Publisher Sites",excerpt:"Getting rejected by high-DA publishers? These 10 content formats consistently get accepted, drive the most traffic once published, and generate the most natural backlinks over time.",content:`After analysing thousands of successful guest posts placed through Authority Media Placement, these are the content types editors most reliably accept — and that perform best 

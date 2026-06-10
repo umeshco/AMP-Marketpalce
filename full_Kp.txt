@@ -1,0 +1,168 @@
+function Kp({onBack:e}){const[t,n]=T.useState(null),r=[{id:1,emoji:"🔗",category:"Link Building",readTime:"12 min",date:"June 1, 2026",author:"Authority Media Team",title:"The Complete Guide to Guest Posting in 2026: What Works, What Doesn't",excerpt:"Guest posting remains one of the most powerful white-hat link building strategies. In this comprehensive guide, we cover finding the right sites, crafting pitches that get accepted, and maximising the SEO value of every link.",content:`Guest posting in 2026 is more competitive than ever — but also more rewarding for those who do it right. Google's algorithm continues to value high-quality editorial links from authoritative, relevant websites. Here's a complete breakdown of what you need to know.
+
+WHY GUEST POSTS STILL DELIVER RESULTS
+
+Despite years of predictions about their decline, guest posts on genuine, high-authority sites remain one of the most reliable ways to build domain authority. The key distinction in 2026 is quality: a single link from a DA 65 site in your exact niche will consistently outperform 20 links from DA 20 general sites.
+
+Google's systems have become significantly better at evaluating link quality based on: the editorial standards of the linking site, topical relevance between the source and target, natural anchor text distribution, and the genuine traffic and engagement of the linking page.
+
+FINDING THE RIGHT SITES
+
+Use Authority Media Placement's advanced filters to sort by niche, DA, DR, and traffic. Target sites with DA 40+, genuine organic traffic (15,000+/month), and a clear editorial voice. Avoid sites that publish any content for a price — look for publishers who maintain genuine standards.
+
+CRAFTING A WINNING PITCH
+
+Personalise every pitch. Reference specific articles on the target site. Propose 3 topic ideas that genuinely fit their audience. Show your expertise with links to previous published work. Keep your pitch concise — editors are busy and receive dozens of requests weekly.
+
+WRITING CONTENT THAT GETS PUBLISHED AND SHARED
+
+Write for the site's audience, not for your backlink. Aim for 1,200–2,500 words with genuine depth. Include original research, current statistics, and actionable advice. The backlink should feel natural within the flow of the article — not forced or promotional.
+
+MEASURING ROI CORRECTLY
+
+Track your results in Ahrefs over 3–6 months: monitor referring domain growth, organic keyword rankings for your target pages, and organic traffic trends. Guest posting is a long-term strategy — expect to see meaningful results after 3–6 months of consistent effort.`},{id:2,emoji:"📊",category:"SEO Strategy",readTime:"8 min",date:"May 20, 2026",author:"Priya Sharma",title:"DA vs DR: Which SEO Metric Should Guide Your Link Building in 2026?",excerpt:"Moz DA and Ahrefs DR both claim to predict ranking power — but they measure very different things. Here's a clear, practical breakdown of which metric to trust for different link building decisions.",content:`If you've spent time in the SEO world, you've encountered both Domain Authority (DA) from Moz and Domain Rating (DR) from Ahrefs. Both are widely used — and widely misunderstood. Here's what you actually need to know.
+
+WHAT DOMAIN AUTHORITY (DA) MEASURES
+
+Moz's Domain Authority predicts how likely a domain is to rank well in search results, based on its overall backlink profile quality. It uses a logarithmic 1–100 scale and considers linking root domains, link quality signals, and spam factors. DA is updated regularly as Moz re-crawls the web.
+
+WHAT DOMAIN RATING (DR) MEASURES
+
+Ahrefs' Domain Rating measures the strength of a website's backlink profile relative to all other websites in Ahrefs' database. It focuses specifically on: the number of unique domains linking to the site, and the DR of those linking domains. DR is a purer measure of raw link equity — it doesn't factor in spam or relevance signals.
+
+KEY PRACTICAL DIFFERENCES
+
+DA tends to be more sensitive to link diversity and can drop if a site accumulates many low-quality links, even with high quantity. DR tends to be more stable and rises with raw linking domain quantity from high-DR sources. A site can have high DR but lower DA if its links come from a narrow set of sources.
+
+WHICH TO USE FOR LINK BUILDING DECISIONS
+
+For topical authority campaigns: prioritise niche relevance + DA. A high-DA site in your exact niche carries more ranking power than a high-DR general site. For raw link equity and PageRank flow: prioritise DR. Sites with high DR pass more raw link authority regardless of niche.
+
+THE HONEST TRUTH ABOUT BOTH METRICS
+
+Neither DA nor DR is a Google metric — they are third-party approximations built on incomplete crawl data. The best real predictor of link value remains: genuine organic traffic + clear editorial standards + topical relevance to your target page. Use metrics as a filter, not as the final word.`},{id:3,emoji:"💰",category:"Publisher Tips",readTime:"10 min",date:"May 5, 2026",author:"Amit Singh",title:"How to Earn $2,000–$5,000/Month from Your Blog with Sponsored Content",excerpt:"Real numbers from real publishers. Learn the exact strategies our top earners use to consistently generate income from sponsored posts without compromising their editorial integrity or reader trust.",content:`Our top-performing publishers earn between $2,000 and $8,000 per month from sponsored content. Here's an honest breakdown of how they do it — and how you can replicate their approach.
+
+PRICE YOUR SITE FOR WHAT IT'S WORTH
+
+The single biggest mistake new publishers make is undercharging. Here's a realistic pricing guide based on 2026 market rates on Authority Media Placement:
+
+DA 20–35, 5,000–20,000 traffic/month: $50–$120 per post
+DA 35–50, 20,000–60,000 traffic/month: $120–$250 per post
+DA 50–65, 60,000–150,000 traffic/month: $250–$500 per post
+DA 65+, 150,000+ traffic/month: $500–$1,500 per post
+
+If your site has a high-value niche (finance, legal, healthcare, SaaS), add 30–50% to these figures.
+
+MAINTAIN EDITORIAL QUALITY — IT'S YOUR BRAND
+
+The publishers who earn the most long-term are those who never compromise on content quality. Every sponsored post should genuinely serve your audience. If the content isn't good enough to publish as an organic article, don't publish it for a sponsor either. This maintains reader trust and keeps your traffic growing — which in turn keeps your prices high.
+
+DIVERSIFY YOUR CONTENT OFFERING
+
+Don't just offer guest posts. Offer: link insertions into existing high-traffic articles (often easier and more valuable for advertisers); category-specific placements for premium niches; homepage or sidebar link placements; and social media promotion bundles with your sponsored posts. More products = more revenue streams.
+
+KEEP YOUR METRICS GROWING
+
+A site with growing DA, DR, and traffic can increase prices every 6 months. Publish 4–8 original articles per month alongside your sponsored content. Use solid on-page SEO, internal linking, and content clusters to grow organic rankings consistently.
+
+RESPOND FAST AND DELIVER ON TIME
+
+Publishers with the fastest response rates and delivery times receive the most repeat orders and the best reviews. Set up push notifications for new orders. Respond within 2 hours during business hours. Deliver content at least 24 hours before your stated deadline. These habits compound into significantly higher monthly earnings.`},{id:4,emoji:"🎯",category:"Content Strategy",readTime:"9 min",date:"April 18, 2026",author:"Authority Media Team",title:"10 Content Types With the Highest Acceptance Rates on Premium Publisher Sites",excerpt:"Getting rejected by high-DA publishers? These 10 content formats consistently get accepted, drive the most traffic once published, and generate the most natural backlinks over time.",content:`After analysing thousands of successful guest posts placed through Authority Media Placement, these are the content types editors most reliably accept — and that perform best once live.
+
+1. ORIGINAL RESEARCH & DATA STUDIES
+
+Content built on original surveys, data analysis, or compiled industry statistics gets accepted at the highest rate. Editors love data-driven content because it attracts natural backlinks to their site long after publication. Even a survey of 100 professionals can generate compelling, unique insights.
+
+2. COMPREHENSIVE ULTIMATE GUIDES
+
+Long-form guides (2,500+ words) that cover a topic more thoroughly than any competing content tend to earn top placement. These become reference resources that rank long-term and attract repeat visitors.
+
+3. REAL CASE STUDIES WITH NUMBERS
+
+"How We Increased Organic Traffic by 140% in 6 Months" will always outperform "5 Ways to Increase Traffic." Specific, verifiable results with real numbers build credibility and get shared widely.
+
+4. EXPERT ROUNDUPS
+
+Collecting quotes and insights from 10–20 industry experts on a single question. These are highly shareable, attract backlinks from the quoted experts, and position the host site as an industry hub.
+
+5. COMPARISON ARTICLES
+
+"Tool A vs. Tool B: Which is Better for X?" captures high-intent search traffic and consistently earns high engagement. These work particularly well in SaaS, finance, and marketing niches.
+
+6. STEP-BY-STEP TUTORIALS WITH SCREENSHOTS
+
+Practical, visual guides that walk readers through completing a specific task. These attract bookmarks, shares, and long-term organic traffic from how-to searches.
+
+7. ANNUAL TREND REPORTS
+
+"The State of [Industry] in 2026" style reports are highly shareable and earn significant coverage from industry publications. Create them in Q4 of the previous year or Q1 for maximum impact.
+
+8. CONTRARIAN OPINION PIECES
+
+Bold, well-argued takes on conventional wisdom in your industry. These generate discussion, shares, and links from people who agree — and people who disagree. The key is to back your argument with real evidence, not just opinion.
+
+9. BEGINNER'S GUIDES TO COMPLEX TOPICS
+
+Demystifying complex subjects for newcomers attracts massive search volume. "What is Domain Authority and Does It Matter?" style guides serve readers who are at the start of their learning journey.
+
+10. LISTICLES WITH GENUINE DEPTH
+
+"15 Tools Every Content Marketer Needs in 2026" still works when each item is genuinely useful and described in detail. Avoid padding — each entry should earn its place in the list.`},{id:5,emoji:"🛡️",category:"Platform Guide",readTime:"7 min",date:"April 2, 2026",author:"Authority Media Team",title:"How to Use Authority Media Placement: A Complete Advertiser's Guide",excerpt:"New to the platform? This step-by-step guide walks you through finding the right publisher sites, placing your first order, tracking delivery, and measuring the SEO impact of your campaign.",content:`Whether you're an SEO agency, brand, or independent website owner, Authority Media Placement makes it straightforward to build high-quality backlinks at scale. Here's how to get started.
+
+STEP 1: CREATE YOUR ADVERTISER ACCOUNT
+
+Click "Get Started Free" on the homepage and select "Advertiser" as your role. Enter your name, email, and password. Your account is created instantly — no approval required for advertisers.
+
+STEP 2: ADD FUNDS TO YOUR WALLET
+
+Navigate to the Wallet section and connect your PayPal account. Add funds in the amount you want to spend on your first campaign. Funds are held securely and deducted only when you place an order.
+
+STEP 3: BROWSE THE MARKETPLACE
+
+Use the marketplace filters to find sites that match your campaign needs. Key filters to use:
+
+Niche: Always filter by your target niche first. A link from a site in your exact niche carries significantly more topical relevance.
+DA: Set a minimum DA of 30–40 for most campaigns. For competitive keywords, target DA 50+.
+Traffic: Filter for sites with 10,000+ monthly organic visitors to ensure the link is from a genuinely active site.
+Price: Set a maximum price to stay within your budget.
+Link Type: DoFollow links pass link equity; use these for SEO campaigns.
+
+STEP 4: PLACE YOUR ORDER
+
+Select a site and click "Order Now." You'll need to provide: your target URL (the page you want the link to point to), your preferred anchor text (keep this varied and natural), your post type (Guest Post, Sponsored Post, or Link Insertion), and any special instructions for the publisher.
+
+STEP 5: TRACK YOUR ORDER
+
+After placing your order, track its progress in the Orders section of your dashboard. Most orders move through: Pending → In Progress → Completed within the stated turnaround time.
+
+STEP 6: VERIFY AND MEASURE
+
+Once your order is completed, verify the live URL, check that the link is correctly placed and DoFollow using a tool like Ahrefs Site Explorer, and monitor your target page's rankings in Google Search Console over the following weeks.`},{id:6,emoji:"⚡",category:"Advanced SEO",readTime:"11 min",date:"March 15, 2026",author:"Authority Media Team",title:"Building a Sustainable Link Profile: The 80/20 Strategy That Actually Works",excerpt:"Most link building advice is either too conservative or too aggressive. This guide outlines a balanced, sustainable approach that builds real authority without triggering algorithmic penalties.",content:`The question every SEO faces is: how do you build links aggressively enough to compete, without crossing the line into patterns that attract algorithmic or manual penalties? Here's the 80/20 strategy that our most successful advertisers use.
+
+THE CORE PRINCIPLE: DIVERSITY BY DESIGN
+
+A natural link profile is diverse by default. When real websites link to a genuinely valuable resource, they use varied anchor text, come from different types of sites, and build up over time rather than in sudden spikes. Your goal is to replicate this natural pattern — even when your link building is intentional.
+
+THE 80/20 LINK MIX
+
+80% — Editorial & Earned Links: Links from guest posts on relevant sites (like those on Authority Media Placement), digital PR coverage, resource page placements, and broken link building. These form the backbone of a healthy profile.
+
+20% — Supplementary Links: Forum contributions, directory listings, social profiles, Q&A sites (Quora, Reddit), and low-stakes citation links. These add diversity but should never dominate your profile.
+
+ANCHOR TEXT DISTRIBUTION
+
+For most sites targeting competitive keywords, aim for approximately: 40–50% branded anchors (your brand name, domain); 25–30% generic anchors ("click here," "read more," "this article"); 15–20% partial match anchors (words related to but not exact match); and 5–10% exact match anchors (your target keyword). Never build a profile where exact match anchors exceed 15% — this is one of the clearest signals of manipulative link building.
+
+VELOCITY: HOW FAST IS TOO FAST?
+
+There is no universal answer, but a reasonable guideline for a site with DR 30–50: 5–15 new referring domains per month is natural and sustainable. A sudden jump from 5 to 100 new domains in one month is a red flag, regardless of quality. Build consistently over time rather than in bursts.
+
+TOPICAL AUTHORITY: THE 2026 IMPERATIVE
+
+Google's Helpful Content System and entity-based understanding have made topical relevance more important than ever. A link from a DR 40 site in your exact niche now consistently outperforms a link from a DR 70 general news site. Prioritise relevance over raw metrics in your publisher selection.
+
+MONITORING AND MAINTENANCE
+
+Check your backlink profile monthly in Ahrefs or SEMrush. Disavow toxic links proactively — don't wait for a penalty. Monitor for link removals and reach out to publishers if links are removed before the 12-month guarantee period. Keep a spreadsheet tracking all your built links, their anchor text, DA/DR at time of placement, and monthly status checks.`}];if(t){const i=r.find(o=>o.id===t);return l.jsxs("div",{style:{maxWidth:780,margin:"0 auto",padding:"60px 28px 80px"},children:[l.jsx("button",{onClick:()=>n(null),style:{display:"flex",alignItems:"center",gap:8,background:"none",border:"none",color:p.accent,fontWeight:600,fontSize:14,cursor:"pointer",marginBottom:32,fontFamily:"'DM Sans',sans-serif"},children:"← Back to Blog"}),l.jsxs("div",{style:{marginBottom:28},children:[l.jsx("div",{style:{fontSize:52,marginBottom:16},children:i.emoji}),l.jsx("span",{className:"badge badge-info",style:{marginBottom:14,display:"inline-flex"},children:i.category}),l.jsx("h1",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:30,fontWeight:800,color:p.primary,lineHeight:1.25,margin:"12px 0 16px"},children:i.title}),l.jsxs("div",{style:{display:"flex",gap:20,fontSize:13,color:p.muted,flexWrap:"wrap"},children:[l.jsxs("span",{children:["✍️ ",i.author]}),l.jsxs("span",{children:["📅 ",i.date]}),l.jsxs("span",{children:["⏱ ",i.readTime," read"]})]})]}),l.jsx("div",{style:{borderTop:`1px solid ${p.border}`,paddingTop:28},children:i.content.split(`
+
+`).map((o,s)=>o===o.toUpperCase()&&o.length<80&&!o.includes(".")?l.jsx("h3",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:17,fontWeight:700,color:p.primary,margin:"28px 0 10px"},children:o},s):l.jsx("p",{style:{fontSize:15,color:p.textSoft,lineHeight:1.85,marginBottom:16},children:o},s))}),l.jsxs("div",{style:{marginTop:40,padding:24,background:p.accentLight,border:"1px solid #C7D2FE",borderRadius:12,textAlign:"center"},children:[l.jsx("div",{style:{fontWeight:700,fontSize:16,color:p.primary,marginBottom:6},children:"Start building better links today"}),l.jsx("div",{style:{fontSize:13,color:p.muted,marginBottom:16},children:"Browse 12,000+ vetted publisher sites on Authority Media Placement."}),l.jsx("button",{onClick:e,style:{padding:"10px 24px",background:"linear-gradient(135deg,#6366F1,#4338CA)",color:"white",border:"none",borderRadius:8,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"'Plus Jakarta Sans',sans-serif"},children:"Browse Marketplace →"})]})]})}return l.jsxs("div",{style:{maxWidth:1080,margin:"0 auto",padding:"60px 28px 80px"},children:[l.jsx("button",{onClick:e,style:{display:"flex",alignItems:"center",gap:8,background:"none",border:"none",color:p.accent,fontWeight:600,fontSize:14,cursor:"pointer",marginBottom:40,fontFamily:"'DM Sans',sans-serif"},children:"← Back to Home"}),l.jsxs("div",{style:{marginBottom:48,textAlign:"center"},children:[l.jsx("div",{style:{fontSize:12,fontWeight:700,color:p.accent,letterSpacing:2,textTransform:"uppercase",marginBottom:10},children:"The AMP Blog"}),l.jsx("h1",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:36,fontWeight:800,color:p.primary,marginBottom:12},children:"SEO & Link Building Insights"}),l.jsx("p",{style:{fontSize:16,color:p.muted,maxWidth:520,margin:"0 auto"},children:"Expert guides, publisher tips, and SEO strategy from the Authority Media Placement team."})]}),l.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(320px, 1fr))",gap:20},children:r.map(i=>l.jsxs("div",{onClick:()=>n(i.id),style:{background:"white",border:`1px solid ${p.border}`,borderRadius:16,cursor:"pointer",transition:"all 0.2s",overflow:"hidden"},onMouseEnter:o=>{o.currentTarget.style.transform="translateY(-4px)",o.currentTarget.style.boxShadow="0 12px 32px rgba(99,102,241,0.12)",o.currentTarget.style.borderColor="#A5B4FC"},onMouseLeave:o=>{o.currentTarget.style.transform="",o.currentTarget.style.boxShadow="",o.currentTarget.style.borderColor=p.border},children:[l.jsx("div",{style:{padding:"24px 24px 0",fontSize:44},children:i.emoji}),l.jsxs("div",{style:{padding:"14px 24px 24px"},children:[l.jsx("span",{className:"badge badge-info",style:{marginBottom:12},children:i.category}),l.jsx("h3",{style:{fontFamily:"'Plus Jakarta Sans',sans-serif",fontSize:16,fontWeight:700,color:p.primary,lineHeight:1.4,marginBottom:10},children:i.title}),l.jsx("p",{style:{fontSize:13,color:p.muted,lineHeight:1.65,marginBottom:16},children:i.excerpt}),l.jsxs("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",fontSize:12,color:p.muted,borderTop:`1px solid ${p.border}`,paddingTop:12},children:[l.jsx("span",{children:i.date}),l.jsxs("span",{style:{color:p.accent,fontWeight:600},children:["Read · ",i.readTime," →"]})]})]})]},i.id))})]})}

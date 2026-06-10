@@ -1,0 +1,1 @@
+function Si({status:e}){const t={approved:["badge-success","✓ Approved"],pending:["badge-warning","⏳ Pending"],rejected:["badge-danger","✕ Rejected"],completed:["badge-success","✓ Completed"],in_progress:["badge-info","● In Progress"],cancelled:["badge-danger","✕ Cancelled"]},[n,r]=t[e]||["badge-gray",e];return l.jsx("span",{className:`badge ${n}`,children:r})}
