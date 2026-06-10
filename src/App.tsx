@@ -234,11 +234,1128 @@ function Vp({orders:e,user:t}: any){const n=t.role==="admin"?e:t.role==="adverti
 
 function Yp({user:e}: any){const[t,n]=T.useState(""),[r]=T.useState([{id:"TXN-1",type:"credit",desc:"Order ORD-001 payment received",amount:315,date:"2026-01-01",method:"PayPal"},{id:"TXN-2",type:"debit",desc:"Withdrawal to PayPal",amount:-200,date:"2026-02-28",method:"PayPal"},{id:"TXN-3",type:"credit",desc:"Order ORD-003 payment received",amount:252,date:"2026-03-20",method:"PayPal"}]);return l.jsxs("div",{className:"page",children:[l.jsxs("div",{className:"page-header",children:[l.jsx("div",{className:"page-title",children:"Wallet"}),l.jsx("div",{className:"page-subtitle",children:"Manage your funds and withdrawals"})]}),l.jsxs("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:24},children:[l.jsxs("div",{className:"wallet-card",children:[l.jsx("div",{className:"wallet-label",children:"Available Balance"}),l.jsxs("div",{className:"wallet-balance",children:["$",(e.wallet||0).toFixed(2)]}),l.jsxs("div",{style:{display:"flex",gap:10,marginTop:20,position:"relative",zIndex:1},children:[l.jsx("button",{className:"btn btn-sm",style:{background:"rgba(255,255,255,0.2)",color:"white",border:"1px solid rgba(255,255,255,0.3)"},children:"💳 Add Funds"}),e.role==="publisher"&&l.jsx("button",{className:"btn btn-sm",style:{background:"rgba(255,255,255,0.2)",color:"white",border:"1px solid rgba(255,255,255,0.3)"},children:"📤 Withdraw"})]})]}),l.jsxs("div",{style:{display:"flex",flexDirection:"column",gap:12},children:[e.role==="publisher"&&l.jsxs("div",{className:"card",style:{padding:16,flex:1},children:[l.jsx("div",{style:{fontSize:12,color:p.muted,marginBottom:4},children:"COMMISSION DEDUCTED (10%)"}),l.jsxs("div",{style:{fontSize:24,fontWeight:800,color:p.danger},children:["$",((e.earned||0)*.1).toFixed(2)]}),l.jsx("div",{style:{fontSize:12,color:p.muted,marginTop:4},children:"Platform keeps 10% of each sale"})]}),l.jsxs("div",{className:"card",style:{padding:16,flex:1},children:[l.jsx("div",{style:{fontSize:12,color:p.muted,marginBottom:4},children:e.role==="publisher"?"TOTAL EARNED":"TOTAL SPENT"}),l.jsxs("div",{style:{fontSize:24,fontWeight:800,color:p.success},children:["$",e.role==="publisher"?e.earned||945:e.spent||630]}),l.jsx("div",{style:{fontSize:12,color:p.muted,marginTop:4},children:"All time"})]})]})]}),l.jsxs("div",{className:"card",style:{marginBottom:24},children:[l.jsx("div",{className:"card-header",children:l.jsx("span",{className:"card-title",children:"💳 PayPal Integration"})}),l.jsxs("div",{className:"card-body",children:[l.jsxs("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16},children:[l.jsxs("div",{children:[l.jsx("label",{className:"label",children:"PayPal Email"}),l.jsx("input",{className:"input",placeholder:"your@paypal.com",defaultValue:e.email})]}),l.jsxs("div",{children:[l.jsx("label",{className:"label",children:e.role==="publisher"?"Withdraw Amount ($)":"Add Funds ($)"}),l.jsx("input",{className:"input",type:"number",placeholder:"Enter amount",value:t,onChange:i=>n(i.target.value)})]})]}),l.jsxs("div",{style:{marginTop:12,display:"flex",gap:10},children:[e.role==="publisher"?l.jsx("button",{className:"btn btn-primary",children:"📤 Withdraw via PayPal"}):l.jsx("button",{className:"btn btn-primary",children:"💳 Add Funds via PayPal"}),l.jsx("button",{className:"btn btn-outline",children:"🔗 Connect PayPal Account"})]}),l.jsx("div",{style:{marginTop:10,fontSize:12,color:p.muted},children:"🔒 All transactions are secured through PayPal. Publisher withdrawals are processed within 2-3 business days."})]})]}),l.jsxs("div",{className:"card",children:[l.jsx("div",{className:"card-header",children:l.jsx("span",{className:"card-title",children:"📋 Transaction History"})}),l.jsxs("table",{children:[l.jsx("thead",{children:l.jsxs("tr",{children:[l.jsx("th",{children:"ID"}),l.jsx("th",{children:"Description"}),l.jsx("th",{children:"Amount"}),l.jsx("th",{children:"Date"}),l.jsx("th",{children:"Method"})]})}),l.jsx("tbody",{children:r.map(i=>l.jsxs("tr",{children:[l.jsx("td",{style:{fontWeight:600,color:p.accent},children:i.id}),l.jsx("td",{children:i.desc}),l.jsxs("td",{style:{fontWeight:700,color:i.amount>0?p.success:p.danger},children:[i.amount>0?"+":"","$",Math.abs(i.amount)]}),l.jsx("td",{style:{color:p.muted},children:i.date}),l.jsx("td",{children:l.jsxs("span",{className:"badge badge-info",children:["💳 ",i.method]})})]},i.id))})]})]})]})}
 
-function Gp({sites:e,setSites:t}: any){const[n,r]=T.useState("all"),[i,o]=T.useState(null),[s,a]=T.useState(""),y=c=>{t(c);try{localStorage.setItem("amp_sites",JSON.stringify(c))}catch{}},m=(c,h="success")=>{o({msg:c,type:h}),setTimeout(()=>o(null),3e3)},w=c=>{const h=e.map(x=>x.id===c.id?{...x,status:"approved"}:x);y(h),m(`✓ "${c.domain}" approved — now live on marketplace!`)},N=c=>{const h=e.map(x=>x.id===c.id?{...x,status:"rejected"}:x);y(h),m(`✕ "${c.domain}" rejected`,"error")},v=c=>{const h=e.map(x=>x.id===c.id?{...x,status:"pending"}:x);y(h),m(`"${c.domain}" moved back to pending`)},k=c=>{if(!window.confirm(`Delete "${c.domain}" permanently?`))return;const h=e.filter(x=>x.id!==c.id);y(h),m(`"${c.domain}" deleted`)},z=e.filter(c=>n==="all"||c.status===n).filter(c=>!s||c.domain.toLowerCase().includes(s.toLowerCase())||(c.niche||"").toLowerCase().includes(s.toLowerCase())),f={all:e.length,pending:e.filter(c=>c.status==="pending").length,approved:e.filter(c=>c.status==="approved").length,rejected:e.filter(c=>c.status==="rejected").length};return l.jsxs("div",{className:"page",children:[l.jsxs("div",{className:"page-header",style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start"},children:[l.jsxs("div",{children:[l.jsx("div",{className:"page-title",children:"Sites Management"}),l.jsx("div",{className:"page-subtitle",children:"Review, approve and reject publisher site submissions"})]}),l.jsxs("div",{style:{display:"flex",gap:8,flexWrap:"wrap"},children:[l.jsxs("span",{className:"badge badge-warning",children:[f.pending," pending review"]}),l.jsxs("span",{className:"badge badge-success",children:[f.approved," approved"]}),l.jsxs("span",{className:"badge badge-danger",children:[f.rejected," rejected"]})]})]}),f.pending>0&&l.jsxs("div",{style:{background:"#FFFBEB",border:"1px solid #FDE68A",borderRadius:10,padding:"12px 16px",marginBottom:16,display:"flex",alignItems:"center",gap:10,fontSize:14},children:[l.jsx("span",{style:{fontSize:18},children:"⏳"}),l.jsxs("span",{style:{fontWeight:600,color:"#92400E"},children:[f.pending," site",f.pending>1?"s":""," waiting for your review"]}),l.jsx("button",{className:"btn btn-sm",style:{marginLeft:"auto",background:"#F59E0B",color:"white",border:"none"},onClick:()=>r("pending"),children:"Review Now →"})]}),l.jsx("div",{style:{display:"flex",gap:4,background:p.bg,padding:4,borderRadius:10,width:"fit-content",marginBottom:16},children:[["all","All Sites"],["pending","⏳ Pending"],["approved","✓ Approved"],["rejected","✕ Rejected"]].map(([c,h])=>l.jsxs("div",{className:`tab ${n===c?"active":""}`,onClick:()=>r(c),style:{display:"flex",alignItems:"center",gap:6},children:[h,l.jsx("span",{style:{background:n===c?"rgba(255,255,255,0.3)":p.border,color:n===c?"white":p.muted,borderRadius:50,padding:"1px 7px",fontSize:11,fontWeight:700},children:f[c]})]},c))}),l.jsxs("div",{style:{position:"relative",maxWidth:360,marginBottom:16},children:[l.jsx("span",{style:{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",color:p.muted},children:"🔍"}),l.jsx("input",{className:"input",style:{paddingLeft:38},placeholder:"Search domain or niche...",value:s,onChange:c=>a(c.target.value)})]}),l.jsx("div",{className:"card",children:l.jsxs("table",{children:[l.jsx("thead",{children:l.jsxs("tr",{children:[l.jsx("th",{children:"Domain"}),l.jsx("th",{children:"Publisher"}),l.jsx("th",{children:"Niche"}),l.jsx("th",{children:"DA"}),l.jsx("th",{children:"DR"}),l.jsx("th",{children:"Traffic"}),l.jsx("th",{children:"Price"}),l.jsx("th",{children:"Link"}),l.jsx("th",{children:"Sponsored"}),l.jsx("th",{children:"Status"}),l.jsx("th",{children:"Actions"})]})}),l.jsx("tbody",{children:z.length===0?l.jsx("tr",{children:l.jsx("td",{colSpan:11,children:l.jsxs("div",{className:"empty-state",children:[l.jsx("div",{className:"empty-icon",children:"🌐"}),l.jsxs("div",{className:"empty-title",children:["No sites ",n!=="all"?`with status "${n}"`:"found"]}),l.jsx("div",{className:"empty-desc",children:"Publisher-submitted sites will appear here"})]})})}):z.map(c=>l.jsxs("tr",{style:{background:c.status==="pending"?"#FFFDF0":"white"},children:[l.jsxs("td",{children:[l.jsxs("div",{style:{fontWeight:700,color:p.primary,fontSize:14},children:["🌐 ",c.domain]}),l.jsxs("div",{style:{fontSize:11,color:p.muted},children:[c.turnaround||5,"d turnaround"]})]}),l.jsx("td",{style:{color:p.muted,fontSize:13},children:c.publisher||"—"}),l.jsx("td",{children:l.jsx("span",{className:"badge badge-gray",style:{fontSize:11},children:c.niche||"—"})}),l.jsx("td",{children:l.jsx("span",{style:{fontWeight:700,color:"#E24B4A"},children:c.da||"—"})}),l.jsx("td",{children:l.jsx("span",{style:{fontWeight:700,color:"#0F6E56"},children:c.dr||"—"})}),l.jsx("td",{style:{fontSize:13},children:c.traffic?Number(c.traffic).toLocaleString():"—"}),l.jsxs("td",{style:{fontWeight:700,color:p.accent},children:["$",c.price||"—"]}),l.jsx("td",{children:l.jsx("span",{className:`badge ${c.dofollow?"badge-success":"badge-gray"}`,style:{fontSize:11},children:c.dofollow?"DoFollow":"NoFollow"})}),l.jsx("td",{children:l.jsx("span",{style:{padding:"3px 8px",borderRadius:50,fontSize:11,fontWeight:600,background:c.sponsoredTag?"#FFF7ED":"#F1F5F9",color:c.sponsoredTag?"#C2410C":"#64748B"},children:c.sponsoredTag?"🏷 Yes":"No"})}),l.jsx("td",{children:l.jsx(Si,{status:c.status||"pending"})}),l.jsx("td",{children:l.jsxs("div",{style:{display:"flex",gap:5,flexWrap:"wrap"},children:[c.status!=="approved"&&l.jsx("button",{className:"btn btn-sm btn-success",onClick:()=>w(c),children:"✓ Approve"}),c.status!=="rejected"&&l.jsx("button",{className:"btn btn-sm btn-danger",onClick:()=>N(c),children:"✕ Reject"}),c.status!=="pending"&&l.jsx("button",{className:"btn btn-sm btn-outline",onClick:()=>v(c),children:"↺ Reset"}),l.jsx("button",{className:"btn btn-sm",onClick:()=>k(c),style:{background:"#FEF2F2",color:"#EF4444",border:"1px solid #FECACA",cursor:"pointer"},children:"🗑"})]})})]},c.id))})]})}),i&&l.jsx("div",{style:{position:"fixed",bottom:24,right:24,zIndex:9999,background:i.type==="error"?p.danger:p.success,color:"white",padding:"13px 22px",borderRadius:10,fontWeight:600,fontSize:14,boxShadow:"0 4px 20px rgba(0,0,0,0.2)",maxWidth:400},children:i.msg})]})}
+function Gp({sites:e,setSites:t}: any){
+  const [n, r] = T.useState("all");
+  const [i, o] = T.useState<any>(null);
+  const [s, a] = T.useState("");
 
-function Qp(){const[e,t]=T.useState("all"),[n,r]=T.useState([]);T.useEffect(()=>{const o=[{id:"adv1",name:"Rajesh Kumar",email:"rajesh@adv.com",role:"advertiser",wallet:2500,joined:"2026-01-01",activity:"3 orders"},{id:"pub1",name:"Priya Sharma",email:"priya@pub.com",role:"publisher",wallet:847.5,joined:"2026-01-15",activity:"2 sites"},{id:"pub2",name:"Amit Singh",email:"amit@pub.com",role:"publisher",wallet:360,joined:"2026-02-01",activity:"2 sites"},{id:"adv2",name:"Sunita Rao",email:"sunita@adv.com",role:"advertiser",wallet:1200,joined:"2026-03-20",activity:"1 order"}];let s: any={};try{s=JSON.parse(localStorage.getItem("amp_users")||"{}")}catch{}const a=Object.values(s).map((y: any)=>({id:y.id,name:y.name,email:y.email,role:y.role,wallet:0,joined:new Date().toISOString().split("T")[0],activity:"New user"})),u=new Set(a.map(y=>y.email)),d=[...a,...o.filter(y=>!u.has(y.email))];r(d)},[]);const i=e==="all"?n:n.filter(o=>o.role===e);return l.jsxs("div",{className:"page",children:[l.jsxs("div",{className:"page-header",style:{display:"flex",justifyContent:"space-between",alignItems:"center"},children:[l.jsxs("div",{children:[l.jsx("div",{className:"page-title",children:"Users Management"}),l.jsxs("div",{className:"page-subtitle",children:[n.length," total registered users"]})]}),l.jsxs("div",{style:{display:"flex",gap:8},children:[l.jsxs("span",{className:"badge badge-info",children:[n.filter(o=>o.role==="advertiser").length," advertisers"]}),l.jsxs("span",{className:"badge badge-success",children:[n.filter(o=>o.role==="publisher").length," publishers"]})]})]}),l.jsx("div",{className:"tabs",style:{marginBottom:20},children:[["all","👥 All Users"],["advertiser","📣 Advertisers"],["publisher","🌐 Publishers"]].map(([o,s])=>l.jsx("div",{className:`tab ${e===o?"active":""}`,onClick:()=>t(o),children:s},o))}),l.jsx("div",{className:"card",children:l.jsxs("table",{children:[l.jsx("thead",{children:l.jsxs("tr",{children:[l.jsx("th",{children:"Name"}),l.jsx("th",{children:"Email"}),l.jsx("th",{children:"Role"}),l.jsx("th",{children:"Wallet"}),l.jsx("th",{children:"Joined"}),l.jsx("th",{children:"Activity"}),l.jsx("th",{children:"Action"})]})}),l.jsx("tbody",{children:i.length===0?l.jsx("tr",{children:l.jsx("td",{colSpan:7,children:l.jsxs("div",{className:"empty-state",children:[l.jsx("div",{className:"empty-icon",children:"👥"}),l.jsxs("div",{className:"empty-title",children:["No ",e==="all"?"users":e+"s"," yet"]}),l.jsx("div",{className:"empty-desc",children:"Registered users will appear here automatically"})]})})}):i.map(o=>{var s;return l.jsxs("tr",{children:[l.jsx("td",{style:{fontWeight:600,color:p.primary},children:l.jsxs("div",{style:{display:"flex",alignItems:"center",gap:8},children:[l.jsx("div",{style:{width:32,height:32,borderRadius:"50%",background:p.accentLight,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:700,color:p.accent},children:((s=o.name)==null?void 0:s.split(" ").map(a=>a[0]).join(""))||"?"}),o.name]})}),l.jsx("td",{style:{color:p.muted},children:o.email}),l.jsx("td",{children:l.jsx("span",{className:`badge ${o.role==="advertiser"?"badge-info":"badge-success"}`,children:o.role})}),l.jsxs("td",{style:{fontWeight:700,color:p.accent},children:["$",(o.wallet||0).toFixed(2)]}),l.jsx("td",{style:{color:p.muted},children:o.joined}),l.jsx("td",{style:{color:p.muted},children:o.activity}),l.jsx("td",{children:l.jsxs("div",{style:{display:"flex",gap:6},children:[l.jsx("button",{className:"btn btn-sm btn-outline",children:"Edit"}),l.jsx("button",{className:"btn btn-sm",style:{background:p.dangerLight,color:p.danger,border:"none",cursor:"pointer"},children:"Ban"})]})})]},o.id)})})]})})]})}
+  const y = (c: any) => {
+    t(c);
+    try {
+      localStorage.setItem("amp_sites", JSON.stringify(c));
+    } catch {}
+  };
 
-function Xi({onLogin:e,onClose:t,defaultTab:n}: any){const[r,i]=T.useState(n||"login"),[o,s]=T.useState(""),[a,u]=T.useState(""),[d,y]=T.useState(""),[m,w]=T.useState("advertiser"),[N,v]=T.useState(""),[k,z]=T.useState(!1),[f,c]=T.useState(!1),[h,x]=T.useState(0),[g,j]=T.useState(!1),S=T.useRef(null),C=()=>{j(!0),v("Too many failed attempts. Please wait 30 seconds."),S.current=setTimeout(()=>{j(!1),x(0),v("")},3e4)},M=async()=>{if(!g){if(v(""),!o.trim()){v("Please enter your email address.");return}if(!a.trim()){v("Please enter your password.");return}if(r==="login"){if(["admin@authorityplacement.com","authorityplacement@gmail.com"].includes(o.toLowerCase().trim())){v("Admin accounts must log in via the admin portal. Go to: yoursite.com/?admin=1");return}z(!0);const _=ii[o.toLowerCase().trim()];if(_){const q=await Oo(a,_.hash);if(z(!1),!q){const Fe=h+1;x(Fe),Fe>=5?C():v(`Incorrect password. ${5-Fe} attempt${5-Fe!==1?"s":""} remaining.`);return}x(0),e(_.user)}else{z(!1);const q=localStorage.getItem("amp_users"),_e=(q?JSON.parse(q):{})[o.toLowerCase().trim()];if(!_e){v("No account found. Please sign up first.");return}if(_e.password!==a){const It=h+1;x(It),It>=5?C():v(`Incorrect password. ${5-It} attempt${5-It!==1?"s":""} remaining.`);return}x(0),e({role:_e.role,name:_e.name,email:_e.email,id:_e.id,wallet:_e.role==="advertiser"?1e3:0})}}else{if(!d.trim()){v("Please enter your full name.");return}if(!o.includes("@")){v("Please enter a valid email address.");return}if(a.length<6){v("Password must be at least 6 characters.");return}const E=localStorage.getItem("amp_users"),_=E?JSON.parse(E):{};if(ii[o.toLowerCase()]||_[o.toLowerCase()]){v("An account with this email already exists. Please sign in.");return}const q={role:m,name:d.trim(),email:o.trim().toLowerCase(),id:"user_"+Date.now(),password:a};_[o.toLowerCase()]=q,localStorage.setItem("amp_users",JSON.stringify(_)),e({role:m,name:d.trim(),email:o.trim(),id:q.id,wallet:m==="advertiser"?1e3:0})}}};return l.jsx("div",{style:{position:"fixed",inset:0,background:"rgba(15,23,42,0.7)",backdropFilter:"blur(8px)",zIndex:1e3,display:"flex",alignItems:"center",justifyContent:"center",padding:20},onClick:E=>E.target===E.currentTarget&&t(),children:l.jsxs("div",{style:{background:"white",borderRadius:20,width:"100%",maxWidth:440,boxShadow:"0 25px 60px rgba(0,0,0,0.3)",overflow:"hidden"},children:[l.jsxs("div",{style:{background:"linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #312E81 100%)",padding:"28px 28px 24px",position:"relative"},children:[l.jsx("div",{style:{display:"flex",alignItems:"center",gap:10,marginBottom:16},children:l.jsx(lt,{size:"sm",theme:"dark"})}),l.jsx("div",{style:{fontSize:22,fontWeight:800,fontFamily:"'Plus Jakarta Sans',sans-serif",color:"white"},children:r==="login"?"Welcome back 👋":"Create your account"}),l.jsx("div",{style:{fontSize:13,color:"rgba(255,255,255,0.6)",marginTop:4},children:r==="login"?"Sign in to your dashboard":"Join thousands of publishers & advertisers"}),l.jsx("button",{onClick:t,style:{position:"absolute",top:20,right:20,background:"rgba(255,255,255,0.1)",border:"none",color:"white",width:30,height:30,borderRadius:"50%",cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"},children:"✕"})]}),l.jsxs("div",{style:{padding:"24px 28px 28px"},children:[l.jsx("div",{style:{display:"flex",background:"#F1F5F9",borderRadius:10,padding:4,marginBottom:20},children:["login","signup"].map(E=>l.jsx("button",{onClick:()=>{i(E),v(""),x(0)},style:{flex:1,padding:"8px",borderRadius:7,border:"none",fontWeight:600,fontSize:13,cursor:"pointer",background:r===E?"white":"transparent",color:r===E?p.primary:p.muted,boxShadow:r===E?"0 1px 4px rgba(0,0,0,0.1)":"none",fontFamily:"'DM Sans',sans-serif"},children:E==="login"?"Sign In":"Sign Up"},E))}),r==="login"&&l.jsxs("div",{style:{background:"#EEF2FF",border:"1px solid #C7D2FE",borderRadius:10,padding:12,marginBottom:18,fontSize:12},children:[l.jsx("div",{style:{fontWeight:700,color:"#3730A3",marginBottom:6},children:"🔑 Demo Accounts (click to fill):"}),[["rajesh@adv.com","Advertiser","Demo@1234"],["priya@pub.com","Publisher","Demo@1234"]].map(([E,_,q])=>l.jsxs("div",{onClick:()=>{s(E),u(q),v("")},style:{cursor:"pointer",color:"#4338CA",padding:"3px 0",fontWeight:500},children:["▸ ",E," ",l.jsxs("span",{style:{color:p.muted,fontWeight:400},children:["(",_,") — pw: ",q]})]},E))]}),N&&l.jsxs("div",{style:{background:"#FEF2F2",border:"1px solid #FECACA",borderRadius:8,padding:"10px 14px",marginBottom:16,fontSize:13,color:"#991B1B",fontWeight:500,display:"flex",alignItems:"center",gap:8},children:[l.jsx("span",{children:"⚠️"})," ",N]}),g&&l.jsx("div",{style:{background:"#FFF7ED",border:"1px solid #FED7AA",borderRadius:8,padding:"10px 14px",marginBottom:16,fontSize:13,color:"#92400E",fontWeight:600,textAlign:"center"},children:"🔒 Account temporarily locked. Try again in 30 seconds."}),r==="signup"&&l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Full Name"}),l.jsx("input",{className:"input",placeholder:"Your full name",value:d,onChange:E=>{y(E.target.value),v("")}})]}),l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Email Address"}),l.jsx("input",{className:"input",type:"email",placeholder:"you@example.com",value:o,onChange:E=>{s(E.target.value),v("")},onKeyDown:E=>E.key==="Enter"&&M()})]}),l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Password"}),l.jsxs("div",{style:{position:"relative"},children:[l.jsx("input",{className:"input",type:f?"text":"password",placeholder:"••••••••",value:a,onChange:E=>{u(E.target.value),v("")},onKeyDown:E=>E.key==="Enter"&&M(),style:{paddingRight:44}}),l.jsx("button",{onClick:()=>c(E=>!E),style:{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,color:p.muted},children:f?"🙈":"👁️"})]}),r==="signup"&&l.jsx("div",{style:{fontSize:11,color:p.muted,marginTop:5},children:"Min 8 chars · 1 uppercase · 1 number required"})]}),r==="signup"&&l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"I want to"}),l.jsx("div",{style:{display:"flex",gap:8},children:[["advertiser","📣 Buy Links"],["publisher","🌐 Sell Links"]].map(([E,_])=>l.jsx("button",{onClick:()=>w(E),style:{flex:1,padding:"10px",borderRadius:8,border:`2px solid ${m===E?p.accent:p.border}`,background:m===E?p.accentLight:"white",color:m===E?p.accent:p.muted,fontWeight:600,fontSize:13,cursor:"pointer",fontFamily:"'DM Sans',sans-serif"},children:_},E))})]}),l.jsx("button",{onClick:M,disabled:k||g,style:{width:"100%",padding:"13px",background:g?"#94A3B8":"linear-gradient(135deg, #6366F1, #4338CA)",color:"white",border:"none",borderRadius:10,fontWeight:700,fontSize:15,cursor:g?"not-allowed":"pointer",fontFamily:"'Plus Jakarta Sans',sans-serif",marginTop:4,display:"flex",alignItems:"center",justifyContent:"center",gap:8},children:k?l.jsxs(l.Fragment,{children:[l.jsx("span",{style:{width:18,height:18,border:"2px solid rgba(255,255,255,0.4)",borderTopColor:"white",borderRadius:"50%",display:"inline-block",animation:"spin 0.7s linear infinite"}})," Verifying..."]}):r==="login"?"Sign In to Dashboard →":"Create Free Account →"}),l.jsx("div",{style:{textAlign:"center",marginTop:14,fontSize:13,color:p.muted},children:r==="login"?l.jsxs(l.Fragment,{children:["No account? ",l.jsx("span",{style:{color:p.accent,cursor:"pointer",fontWeight:600},onClick:()=>{i("signup"),v("")},children:"Sign up free"})]}):l.jsxs(l.Fragment,{children:["Already have an account? ",l.jsx("span",{style:{color:p.accent,cursor:"pointer",fontWeight:600},onClick:()=>{i("login"),v("")},children:"Sign in"})]})})]})]})})}
+  const m = (c: any, h = "success") => {
+    o({ msg: c, type: h });
+    setTimeout(() => o(null), 3e3);
+  };
+
+  const w = (c: any) => {
+    const h = e.map((x: any) => x.id === c.id ? { ...x, status: "approved" } : x);
+    y(h);
+    m(`✓ "${c.domain}" approved — now live on marketplace!`);
+  };
+
+  const N = (c: any) => {
+    const h = e.map((x: any) => x.id === c.id ? { ...x, status: "rejected" } : x);
+    y(h);
+    m(`✕ "${c.domain}" rejected`, "error");
+  };
+
+  const v = (c: any) => {
+    const h = e.map((x: any) => x.id === c.id ? { ...x, status: "pending" } : x);
+    y(h);
+    m(`"${c.domain}" moved back to pending`);
+  };
+
+  const k = (c: any) => {
+    if (!window.confirm(`Delete "${c.domain}" permanently?`)) return;
+    const h = e.filter((x: any) => x.id !== c.id);
+    y(h);
+    m(`"${c.domain}" deleted`);
+  };
+
+  const z = e.filter((c: any) => n === "all" || c.status === n)
+           .filter((c: any) => !s || c.domain.toLowerCase().includes(s.toLowerCase()) || (c.niche || "").toLowerCase().includes(s.toLowerCase()));
+
+  const f = {
+    all: e.length,
+    pending: e.filter((c: any) => c.status === "pending").length,
+    approved: e.filter((c: any) => c.status === "approved").length,
+    rejected: e.filter((c: any) => c.status === "rejected").length
+  };
+
+  return l.jsxs("div", {
+    className: "page",
+    children: [
+      l.jsxs("div", {
+        className: "page-header",
+        style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" },
+        children: [
+          l.jsxs("div", {
+            children: [
+              l.jsx("div", { className: "page-title", children: "Sites Management" }),
+              l.jsx("div", { className: "page-subtitle", children: "Review, approve and reject publisher site submissions" })
+            ]
+          }),
+          l.jsxs("div", {
+            style: { display: "flex", gap: 8, flexWrap: "wrap" },
+            children: [
+              l.jsxs("span", { className: "badge badge-warning", children: [f.pending, " pending review"] }),
+              l.jsxs("span", { className: "badge badge-success", children: [f.approved, " approved"] }),
+              l.jsxs("span", { className: "badge badge-danger", children: [f.rejected, " rejected"] })
+            ]
+          })
+        ]
+      }),
+      f.pending > 0 && l.jsxs("div", {
+        style: { background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 10, padding: "12px 16px", marginBottom: 16, display: "flex", alignItems: "center", gap: 10, fontSize: 14 },
+        children: [
+          l.jsx("span", { style: { fontSize: 18 }, children: "⏳" }),
+          l.jsxs("span", { style: { fontWeight: 600, color: "#92400E" }, children: [f.pending, " site", f.pending > 1 ? "s" : "", " waiting for your review"] }),
+          l.jsx("button", { className: "btn btn-sm", style: { marginLeft: "auto", background: "#F59E0B", color: "white", border: "none" }, onClick: () => r("pending"), children: "Review Now →" })
+        ]
+      }),
+      l.jsx("div", {
+        style: { display: "flex", gap: 4, background: p.bg, padding: 4, borderRadius: 10, width: "fit-content", marginBottom: 16 },
+        children: [["all", "All Sites"], ["pending", "⏳ Pending"], ["approved", "✓ Approved"], ["rejected", "✕ Rejected"]].map(([c, h]) =>
+          l.jsxs("div", {
+            className: `tab ${n === c ? "active" : ""}`,
+            onClick: () => r(c),
+            style: { display: "flex", alignItems: "center", gap: 6 },
+            children: [
+              h,
+              l.jsx("span", {
+                style: { background: n === c ? "rgba(255,255,255,0.3)" : p.border, color: n === c ? "white" : p.muted, borderRadius: 50, padding: "1px 7px", fontSize: 11, fontWeight: 700 },
+                children: f[c as keyof typeof f]
+              })
+            ]
+          }, c)
+        )
+      }),
+      l.jsxs("div", {
+        style: { position: "relative", maxWidth: 360, marginBottom: 16 },
+        children: [
+          l.jsx("span", { style: { position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: p.muted }, children: "🔍" }),
+          l.jsx("input", { className: "input", style: { paddingLeft: 38 }, placeholder: "Search domain or niche...", value: s, onChange: c => a(c.target.value) })
+        ]
+      }),
+      l.jsx("div", {
+        className: "card",
+        children: l.jsxs("table", {
+          children: [
+            l.jsx("thead", {
+              children: l.jsxs("tr", {
+                children: [
+                  l.jsx("th", { children: "Domain" }),
+                  l.jsx("th", { children: "Publisher" }),
+                  l.jsx("th", { children: "Niche" }),
+                  l.jsx("th", { children: "DA" }),
+                  l.jsx("th", { children: "DR" }),
+                  l.jsx("th", { children: "Traffic" }),
+                  l.jsx("th", { children: "Price" }),
+                  l.jsx("th", { children: "Link" }),
+                  l.jsx("th", { children: "Sponsored" }),
+                  l.jsx("th", { children: "Status" }),
+                  l.jsx("th", { children: "Actions" })
+                ]
+              })
+            }),
+            l.jsx("tbody", {
+              children: z.length === 0 ? (
+                l.jsx("tr", {
+                  children: l.jsx("td", {
+                    colSpan: 11,
+                    children: l.jsxs("div", {
+                      className: "empty-state",
+                      children: [
+                        l.jsx("div", { className: "empty-icon", children: "🌐" }),
+                        l.jsxs("div", { className: "empty-title", children: ["No sites ", n !== "all" ? `with status "${n}"` : "found"] }),
+                        l.jsx("div", { className: "empty-desc", children: "Publisher-submitted sites will appear here" })
+                      ]
+                    })
+                  })
+                })
+              ) : (
+                z.map((c: any) =>
+                  l.jsxs("tr", {
+                    style: { background: c.status === "pending" ? "#FFFDF0" : "white" },
+                    children: [
+                      l.jsxs("td", {
+                        children: [
+                          l.jsxs("div", { style: { fontWeight: 700, color: p.primary, fontSize: 14 }, children: ["🌐 ", c.domain] }),
+                          l.jsxs("div", { style: { fontSize: 11, color: p.muted }, children: [c.turnaround || 5, "d turnaround"] })
+                        ]
+                      }),
+                      l.jsx("td", { style: { color: p.muted, fontSize: 13 }, children: c.publisher || "—" }),
+                      l.jsx("td", { children: l.jsx("span", { className: "badge badge-gray", style: { fontSize: 11 }, children: c.niche || "—" }) }),
+                      l.jsx("td", { children: l.jsx("span", { style: { fontWeight: 700, color: "#E24B4A" }, children: c.da || "—" }) }),
+                      l.jsx("td", { children: l.jsx("span", { style: { fontWeight: 700, color: "#0F6E56" }, children: c.dr || "—" }) }),
+                      l.jsx("td", { style: { fontSize: 13 }, children: c.traffic ? Number(c.traffic).toLocaleString() : "—" }),
+                      l.jsxs("td", { style: { fontWeight: 700, color: p.accent }, children: ["$", c.price || "—"] }),
+                      l.jsx("td", { children: l.jsx("span", { className: `badge ${c.dofollow ? "badge-success" : "badge-gray"}`, style: { fontSize: 11 }, children: c.dofollow ? "DoFollow" : "NoFollow" }) }),
+                      l.jsx("td", { children: l.jsx("span", { style: { padding: "3px 8px", borderRadius: 50, fontSize: 11, fontWeight: 600, background: c.sponsoredTag ? "#FFF7ED" : "#F1F5F9", color: c.sponsoredTag ? "#C2410C" : "#64748B" }, children: c.sponsoredTag ? "🏷 Yes" : "No" }) }),
+                      l.jsx("td", { children: l.jsx(Si, { status: c.status || "pending" }) }),
+                      l.jsx("td", {
+                        children: l.jsxs("div", {
+                          style: { display: "flex", gap: 5, flexWrap: "wrap" },
+                          children: [
+                            c.status !== "approved" && l.jsx("button", { className: "btn btn-sm btn-success", onClick: () => w(c), children: "✓ Approve" }),
+                            c.status !== "rejected" && l.jsx("button", { className: "btn btn-sm btn-danger", onClick: () => N(c), children: "✕ Reject" }),
+                            c.status !== "pending" && l.jsx("button", { className: "btn btn-sm btn-outline", onClick: () => v(c), children: "↺ Reset" }),
+                            l.jsx("button", { className: "btn btn-sm", onClick: () => k(c), style: { background: "#FEF2F2", color: "#EF4444", border: "1px solid #FECACA", cursor: "pointer" }, children: "🗑" })
+                          ]
+                        })
+                      })
+                    ]
+                  }, c.id)
+                )
+              )
+            })
+          ]
+        })
+      }),
+      i && l.jsx("div", {
+        style: { position: "fixed", bottom: 24, right: 24, zIndex: 9999, background: i.type === "error" ? p.danger : p.success, color: "white", padding: "13px 22px", borderRadius: 10, fontWeight: 600, fontSize: 14, boxShadow: "0 4px 20px rgba(0,0,0,0.2)", maxWidth: 400 },
+        children: i.msg
+      })
+    ]
+  });
+}
+
+function Qp(){
+  const [activeTab, setActiveTab] = T.useState("all");
+  const [users, setUsers] = T.useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = T.useState("");
+  const [editingUser, setEditingUser] = T.useState<any>(null);
+  const [showEditModal, setShowEditModal] = T.useState(false);
+  const [toast, setToast] = T.useState<{msg: string, type: string} | null>(null);
+
+  const showToastMessage = (msg: string, type = "success") => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const loadUsersList = () => {
+    const defaultList = [
+      {id:"adv1",name:"Rajesh Kumar",email:"rajesh@adv.com",role:"advertiser",wallet:2500,joined:"2026-01-01",activity:"3 orders",status:"approved"},
+      {id:"pub1",name:"Priya Sharma",email:"priya@pub.com",role:"publisher",wallet:847.5,joined:"2026-01-15",activity:"2 sites",status:"approved"},
+      {id:"pub2",name:"Amit Singh",email:"amit@pub.com",role:"publisher",wallet:360,joined:"2026-02-01",activity:"2 sites",status:"approved"},
+      {id:"adv2",name:"Sunita Rao",email:"sunita@adv.com",role:"advertiser",wallet:1200,joined:"2026-03-20",activity:"1 order",status:"approved"}
+    ];
+    let localUsers: any={};
+    try {
+      localUsers = JSON.parse(localStorage.getItem("amp_users") || "{}");
+    } catch{}
+    
+    const mergedList: any[] = [];
+    
+    // Merge defaults with local overrides
+    defaultList.forEach(u => {
+      const override = localUsers[u.email.toLowerCase()];
+      if (override) {
+        mergedList.push({
+          ...u,
+          ...override,
+          wallet: override.wallet !== undefined ? Number(override.wallet) : u.wallet,
+          status: override.status || u.status || "approved"
+        });
+      } else {
+        mergedList.push(u);
+      }
+    });
+
+    // Add other dynamic users from local registry
+    const defaultEmails = new Set(defaultList.map(u => u.email.toLowerCase()));
+    Object.values(localUsers).forEach((u: any) => {
+      if (!defaultEmails.has(u.email.toLowerCase())) {
+        mergedList.push({
+          id: u.id || "user_" + Date.now(),
+          name: u.name,
+          email: u.email,
+          role: u.role,
+          wallet: u.wallet !== undefined ? Number(u.wallet) : (u.role === "advertiser" ? 1000 : 0),
+          joined: u.joined || new Date().toISOString().split("T")[0],
+          activity: u.activity || "New user",
+          status: u.status || "approved"
+        });
+      }
+    });
+
+    setUsers(mergedList);
+  };
+
+  T.useEffect(() => {
+    loadUsersList();
+  }, []);
+
+  const saveUsersToStorage = (updatedList: any[]) => {
+    setUsers(updatedList);
+    let existing: any = {};
+    try {
+      existing = JSON.parse(localStorage.getItem("amp_users") || "{}");
+    } catch {}
+
+    updatedList.forEach(currUser => {
+      const emailKey = currUser.email.toLowerCase();
+      const oldEntry = existing[emailKey] || {};
+      existing[emailKey] = {
+        ...oldEntry,
+        id: currUser.id,
+        name: currUser.name,
+        email: currUser.email,
+        role: currUser.role,
+        wallet: Number(currUser.wallet || 0),
+        status: currUser.status || "approved",
+        joined: currUser.joined || oldEntry.joined || new Date().toISOString().split("T")[0],
+        activity: currUser.activity || oldEntry.activity || "New user",
+        password: oldEntry.password || "Demo@1234"
+      };
+    });
+
+    try {
+      localStorage.setItem("amp_users", JSON.stringify(existing));
+    } catch {}
+  };
+
+  const handleToggleBan = (u: any) => {
+    const isBanned = u.status === "banned";
+    const nextStatus = isBanned ? "approved" : "banned";
+    
+    if (!isBanned) {
+      if (!window.confirm(`Are you sure you want to ban user "${u.name}"? They won't be able to log in.`)) {
+        return;
+      }
+    }
+    
+    const updated = users.map(userItem => userItem.id === u.id ? { ...userItem, status: nextStatus } : userItem);
+    saveUsersToStorage(updated);
+    showToastMessage(`User "${u.name}" was successfully ${isBanned ? "unbanned" : "banned"}!`, isBanned ? "success" : "error");
+  };
+
+  const handleEditClick = (u: any) => {
+    setEditingUser({ ...u });
+    setShowEditModal(true);
+  };
+
+  const saveEditedUser = () => {
+    if (!editingUser.name.trim()) {
+      alert("Name cannot be empty.");
+      return;
+    }
+    if (!editingUser.email.trim() || !editingUser.email.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    const updated = users.map(u => u.id === editingUser.id ? editingUser : u);
+    saveUsersToStorage(updated);
+    setShowEditModal(false);
+    showToastMessage(`User profile for "${editingUser.name}" has been updated.`);
+  };
+
+  const filteredUsers = users
+    .filter(u => activeTab === "all" || u.role === activeTab)
+    .filter(u => {
+      if (!searchQuery) return true;
+      const term = searchQuery.toLowerCase();
+      return (
+        u.name.toLowerCase().includes(term) ||
+        u.email.toLowerCase().includes(term)
+      );
+    });
+
+  return l.jsxs("div", {
+    className: "page",
+    children: [
+      l.jsxs("div", {
+        className: "page-header",
+        style: { display: "flex", justifyContent: "space-between", alignItems: "center" },
+        children: [
+          l.jsxs("div", {
+            children: [
+              l.jsx("div", { className: "page-title", children: "Users Management" }),
+              l.jsxs("div", {
+                className: "page-subtitle",
+                children: [users.length, " total registered accounts on platform"]
+              })
+            ]
+          }),
+          l.jsxs("div", {
+            style: { display: "flex", gap: 8 },
+            children: [
+              l.jsxs("span", {
+                className: "badge badge-info",
+                children: [users.filter(u => u.role === "advertiser").length, " advertisers"]
+              }),
+              l.jsxs("span", {
+                className: "badge badge-success",
+                children: [users.filter(u => u.role === "publisher").length, " publishers"]
+              })
+            ]
+          })
+        ]
+      }),
+      l.jsxs("div", {
+        style: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, marginBottom: 20, flexWrap: "wrap" },
+        children: [
+          l.jsx("div", {
+            className: "tabs",
+            children: [
+              ["all", "👥 All Users"],
+              ["advertiser", "📣 Advertisers"],
+              ["publisher", "🌐 Publishers"]
+            ].map(([tabId, tabLabel]) =>
+              l.jsx("div", {
+                className: `tab ${activeTab === tabId ? "active" : ""}`,
+                onClick: () => setActiveTab(tabId),
+                children: tabLabel
+              }, tabId)
+            )
+          }),
+          l.jsxs("div", {
+            style: { position: "relative", minWidth: 280 },
+            children: [
+              l.jsx("span", { style: { position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: p.muted }, children: "🔍" }),
+              l.jsx("input", {
+                className: "input",
+                style: { paddingLeft: 38 },
+                placeholder: "Search users by name or email...",
+                value: searchQuery,
+                onChange: e => setSearchQuery(e.target.value)
+              })
+            ]
+          })
+        ]
+      }),
+      l.jsx("div", {
+        className: "card",
+        children: l.jsxs("table", {
+          children: [
+            l.jsx("thead", {
+              children: l.jsxs("tr", {
+                children: [
+                  l.jsx("th", { children: "Name" }),
+                  l.jsx("th", { children: "Email" }),
+                  l.jsx("th", { children: "Role" }),
+                  l.jsx("th", { children: "Wallet" }),
+                  l.jsx("th", { children: "Joined" }),
+                  l.jsx("th", { children: "Activity" }),
+                  l.jsx("th", { children: "Status" }),
+                  l.jsx("th", { children: "Action" })
+                ]
+              })
+            }),
+            l.jsx("tbody", {
+              children: filteredUsers.length === 0 ? (
+                l.jsx("tr", {
+                  children: l.jsx("td", {
+                    colSpan: 8,
+                    children: l.jsxs("div", {
+                      className: "empty-state",
+                      children: [
+                        l.jsx("div", { className: "empty-icon", children: "👥" }),
+                        l.jsxs("div", {
+                          className: "empty-title",
+                          children: ["No ", activeTab === "all" ? "users" : activeTab + "s", " found"]
+                        }),
+                        l.jsx("div", {
+                          className: "empty-desc",
+                          children: "No records match your filters."
+                        })
+                      ]
+                    })
+                  })
+                })
+              ) : (
+                filteredUsers.map(u => {
+                  var initialStr;
+                  return l.jsxs("tr", {
+                    style: { background: u.status === "banned" ? "#FEF2F2" : "none" },
+                    children: [
+                      l.jsx("td", {
+                        style: { fontWeight: 600, color: p.primary },
+                        children: l.jsxs("div", {
+                          style: { display: "flex", alignItems: "center", gap: 8 },
+                          children: [
+                            l.jsx("div", {
+                              style: {
+                                width: 32,
+                                height: 32,
+                                borderRadius: "50%",
+                                background: u.status === "banned" ? p.dangerLight : p.accentLight,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontSize: 12,
+                                fontWeight: 700,
+                                color: u.status === "banned" ? p.danger : p.accent
+                              },
+                              children: ((initialStr = u.name) == null ? void 0 : initialStr.split(" ").map((nPart: string) => nPart[0]).join("")) || "?"
+                            }),
+                            l.jsxs("span", {
+                              style: { textDecoration: u.status === "banned" ? "line-through" : "none", color: u.status === "banned" ? p.muted : p.primary },
+                              children: [u.name, " ", u.id.startsWith("user_") && l.jsx("span", { style: { fontSize: 10, color: p.muted, fontWeight: 400 }, children: "(Self Registered)" })]
+                            })
+                          ]
+                        })
+                      }),
+                      l.jsx("td", { style: { color: p.muted }, children: u.email }),
+                      l.jsx("td", {
+                        children: l.jsx("span", {
+                          className: `badge ${u.role === "advertiser" ? "badge-info" : u.role === "admin" ? "badge-gray" : "badge-success"}`,
+                          children: u.role
+                        })
+                      }),
+                      l.jsxs("td", {
+                        style: { fontWeight: 700, color: p.accent },
+                        children: ["$", (u.wallet || 0).toFixed(2)]
+                      }),
+                      l.jsx("td", { style: { color: p.muted }, children: u.joined }),
+                      l.jsx("td", { style: { color: p.muted }, children: u.activity }),
+                      l.jsx("td", {
+                        children: l.jsx("span", {
+                          className: `badge ${u.status === "banned" ? "badge-danger" : u.status === "pending" ? "badge-warning" : "badge-success"}`,
+                          children: u.status === "banned" ? "✕ Banned" : u.status === "pending" ? "⏳ Pending" : "✓ Active"
+                        })
+                      }),
+                      l.jsx("td", {
+                        children: l.jsxs("div", {
+                          style: { display: "flex", gap: 6 },
+                          children: [
+                            l.jsx("button", {
+                              className: "btn btn-sm btn-outline",
+                              onClick: () => handleEditClick(u),
+                              children: "Edit"
+                            }),
+                            l.jsx("button", {
+                              className: "btn btn-sm",
+                              style: {
+                                background: u.status === "banned" ? p.successLight : p.dangerLight,
+                                color: u.status === "banned" ? p.success : p.danger,
+                                border: "none",
+                                cursor: "pointer"
+                              },
+                              onClick: () => handleToggleBan(u),
+                              children: u.status === "banned" ? "Unban" : "Ban"
+                            })
+                          ]
+                        })
+                      })
+                    ]
+                  }, u.id);
+                })
+              )
+            })
+          ]
+        })
+      }),
+      showEditModal && editingUser && (
+        l.jsx("div", {
+          className: "modal-overlay",
+          onClick: e => e.target === e.currentTarget && setShowEditModal(false),
+          children: l.jsxs("div", {
+            className: "modal",
+            style: { maxWidth: 460 },
+            children: [
+              l.jsxs("div", {
+                className: "modal-header",
+                children: [
+                  l.jsxs("span", { className: "modal-title", children: ["✏️ Edit User — ", editingUser.name] }),
+                  l.jsx("button", { className: "btn btn-ghost btn-sm", onClick: () => setShowEditModal(false), children: "✕" })
+                ]
+              }),
+              l.jsxs("div", {
+                className: "modal-body",
+                children: [
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Full Name" }),
+                      l.jsx("input", {
+                        className: "input",
+                        value: editingUser.name,
+                        onChange: e => setEditingUser({ ...editingUser, name: e.target.value })
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Email Address" }),
+                      l.jsx("input", {
+                        className: "input",
+                        type: "email",
+                        value: editingUser.email,
+                        onChange: e => setEditingUser({ ...editingUser, email: e.target.value })
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Role" }),
+                      l.jsxs("select", {
+                        className: "select",
+                        value: editingUser.role,
+                        onChange: e => setEditingUser({ ...editingUser, role: e.target.value }),
+                        children: [
+                          l.jsx("option", { value: "advertiser", children: "Advertiser (📣 Buy Links)" }),
+                          l.jsx("option", { value: "publisher", children: "Publisher (🌐 Sell Links)" }),
+                          l.jsx("option", { value: "admin", children: "Administrator (⚙️ Admin Panel)" })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Wallet Balance ($)" }),
+                      l.jsx("input", {
+                        className: "input",
+                        type: "number",
+                        step: "0.01",
+                        value: editingUser.wallet,
+                        onChange: e => setEditingUser({ ...editingUser, wallet: parseFloat(e.target.value) || 0 })
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Account Status" }),
+                      l.jsxs("select", {
+                        className: "select",
+                        value: editingUser.status || "approved",
+                        onChange: e => setEditingUser({ ...editingUser, status: e.target.value }),
+                        children: [
+                          l.jsx("option", { value: "approved", children: "✅ Active / Approved" }),
+                          l.jsx("option", { value: "pending", children: "⏳ Pending Review" }),
+                          l.jsx("option", { value: "banned", children: "❌ Banned" })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    style: { display: "flex", gap: 10, marginTop: 24 },
+                    children: [
+                      l.jsx("button", { className: "btn btn-primary", style: { flex: 1 }, onClick: saveEditedUser, children: "Save Changes" }),
+                      l.jsx("button", { className: "btn btn-outline", onClick: () => setShowEditModal(false), children: "Cancel" })
+                    ]
+                  })
+                ]
+              })
+            ]
+          })
+        })
+      ),
+      toast && l.jsx("div", {
+        style: {
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          zIndex: 9999,
+          background: toast.type === "error" ? p.danger : p.success,
+          color: "white",
+          padding: "13px 22px",
+          borderRadius: 10,
+          fontWeight: 600,
+          fontSize: 14,
+          boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+          maxWidth: 400
+        },
+        children: toast.msg
+      })
+    ]
+  });
+}
+
+function Xi({ onLogin, onClose, defaultTab }: any) {
+  const [tab, setTab] = T.useState(defaultTab || "login");
+  const [email, setEmail] = T.useState("");
+  const [password, setPassword] = T.useState("");
+  const [fullName, setFullName] = T.useState("");
+  const [role, setRole] = T.useState("advertiser");
+  const [error, setError] = T.useState("");
+  const [loading, setLoading] = T.useState(false);
+  const [showPassword, setShowPassword] = T.useState(false);
+  const [attempts, setAttempts] = T.useState(0);
+  const [isLocked, setIsLocked] = T.useState(false);
+  const lockTimer = T.useRef<any>(null);
+
+  const startLockout = () => {
+    setIsLocked(true);
+    setError("Too many failed attempts. Please wait 30 seconds.");
+    lockTimer.current = setTimeout(() => {
+      setIsLocked(false);
+      setAttempts(0);
+      setError("");
+    }, 30000);
+  };
+
+  const handleLogin = async () => {
+    if (isLocked) return;
+    setError("");
+    if (!email.trim()) {
+      setError("Please enter your email address.");
+      return;
+    }
+    if (!password.trim()) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    if (tab === "login") {
+      if (["admin@authorityplacement.com", "authorityplacement@gmail.com"].includes(email.toLowerCase().trim())) {
+        setError("Admin accounts must log in via the admin portal. Go to: yoursite.com/?admin=1");
+        return;
+      }
+      setLoading(true);
+      const q = localStorage.getItem("amp_users");
+      const userRecord = (q ? JSON.parse(q) : {})[email.toLowerCase().trim()];
+      const mockRecord = ii[email.toLowerCase().trim() as keyof typeof ii];
+
+      if (userRecord && userRecord.status === "banned") {
+        setLoading(false);
+        setError("🚫 This account has been banned by an administrator.");
+        return;
+      }
+      if (userRecord && userRecord.status === "pending") {
+        setLoading(false);
+        setError("⏳ Your account is pending administrator review.");
+        return;
+      }
+
+      if (mockRecord) {
+        const passwordMatch = await Oo(password, mockRecord.hash);
+        setLoading(false);
+        if (!passwordMatch) {
+          const nextAttempts = attempts + 1;
+          setAttempts(nextAttempts);
+          if (nextAttempts >= 5) {
+            startLockout();
+          } else {
+            setError(`Incorrect password. ${5 - nextAttempts} attempt${5 - nextAttempts !== 1 ? "s" : ""} remaining.`);
+          }
+          return;
+        }
+        setAttempts(0);
+        const nameVal = userRecord?.name || mockRecord.user.name;
+        const roleVal = userRecord?.role || mockRecord.user.role;
+        const walletVal = userRecord?.wallet !== void 0 ? Number(userRecord.wallet) : (mockRecord.user as any).wallet;
+        onLogin({ ...mockRecord.user, name: nameVal, role: roleVal, wallet: walletVal } as any);
+      } else {
+        setLoading(false);
+        if (!userRecord) {
+          setError("No account found. Please sign up first.");
+          return;
+        }
+        if (userRecord.password !== password) {
+          const nextAttempts = attempts + 1;
+          setAttempts(nextAttempts);
+          if (nextAttempts >= 5) {
+            startLockout();
+          } else {
+            setError(`Incorrect password. ${5 - nextAttempts} attempt${5 - nextAttempts !== 1 ? "s" : ""} remaining.`);
+          }
+          return;
+        }
+        setAttempts(0);
+        onLogin({
+          role: userRecord.role,
+          name: userRecord.name,
+          email: userRecord.email,
+          id: userRecord.id,
+          wallet: userRecord.wallet !== void 0 ? Number(userRecord.wallet) : (userRecord.role === "advertiser" ? 1000 : 0),
+        });
+      }
+    } else {
+      if (!fullName.trim()) {
+        setError("Please enter your full name.");
+        return;
+      }
+      if (!email.includes("@")) {
+        setError("Please enter a valid email address.");
+        return;
+      }
+      if (password.length < 6) {
+        setError("Password must be at least 6 characters.");
+        return;
+      }
+      const existingStr = localStorage.getItem("amp_users");
+      const existing = existingStr ? JSON.parse(existingStr) : {};
+      if (ii[email.toLowerCase() as keyof typeof ii] || existing[email.toLowerCase()]) {
+        setError("An account with this email already exists. Please sign in.");
+        return;
+      }
+      const newRecord = {
+        role,
+        name: fullName.trim(),
+        email: email.trim().toLowerCase(),
+        id: "user_" + Date.now(),
+        password: password,
+        wallet: role === "advertiser" ? 1000 : 0,
+        status: "approved",
+        joined: new Date().toISOString().split("T")[0],
+        activity: "New user",
+      };
+      existing[email.toLowerCase()] = newRecord;
+      localStorage.setItem("amp_users", JSON.stringify(existing));
+      onLogin({
+        role,
+        name: fullName.trim(),
+        email: email.trim(),
+        id: newRecord.id,
+        wallet: newRecord.wallet,
+        status: newRecord.status,
+        joined: newRecord.joined,
+        activity: newRecord.activity,
+      });
+    }
+  };
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(15,23,42,0.7)",
+        backdropFilter: "blur(8px)",
+        zIndex: 1000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 20
+      }}
+      onClick={E => E.target === E.currentTarget && onClose()}
+    >
+      <div
+        style={{
+          background: "white",
+          borderRadius: 20,
+          width: "100%",
+          maxWidth: 440,
+          boxShadow: "0 25px 60px rgba(0,0,0,0.3)",
+          overflow: "hidden"
+        }}
+      >
+        {/* Header */}
+        <div
+          style={{
+            background: "linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #312E81 100%)",
+            padding: "28px 28px 24px",
+            position: "relative"
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+            <lt size="sm" theme="dark" />
+          </div>
+          <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Plus Jakarta Sans',sans-serif", color: "white" }}>
+            {tab === "login" ? "Welcome back 👋" : "Create your account"}
+          </div>
+          <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>
+            {tab === "login" ? "Sign in to your dashboard" : "Join thousands of publishers & advertisers"}
+          </div>
+          <button
+            onClick={onClose}
+            style={{
+              position: "absolute",
+              top: 20,
+              right: 20,
+              background: "rgba(255,255,255,0.1)",
+              border: "none",
+              color: "white",
+              width: 30,
+              height: 30,
+              borderRadius: "50%",
+              cursor: "pointer",
+              fontSize: 16,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Form Body */}
+        <div style={{ padding: "24px 28px 28px" }}>
+          {/* Tabs */}
+          <div style={{ display: "flex", background: "#F1F5F9", borderRadius: 10, padding: 4, marginBottom: 20 }}>
+            {["login", "signup"].map(tName => (
+              <button
+                key={tName}
+                onClick={() => {
+                  setTab(tName);
+                  setError("");
+                  setAttempts(0);
+                }}
+                style={{
+                  flex: 1,
+                  padding: "8px",
+                  borderRadius: 7,
+                  border: "none",
+                  fontWeight: 600,
+                  fontSize: 13,
+                  cursor: "pointer",
+                  background: tab === tName ? "white" : "transparent",
+                  color: tab === tName ? p.primary : p.muted,
+                  boxShadow: tab === tName ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
+                  fontFamily: "'DM Sans',sans-serif"
+                }}
+              >
+                {tName === "login" ? "Sign In" : "Sign Up"}
+              </button>
+            ))}
+          </div>
+
+          {/* Demo Credentials */}
+          {tab === "login" && (
+            <div style={{ background: "#EEF2FF", border: "1px solid #C7D2FE", borderRadius: 10, padding: 12, marginBottom: 18, fontSize: 12 }}>
+              <div style={{ fontWeight: 700, color: "#3730A3", marginBottom: 6 }}>🔑 Demo Accounts (click to fill):</div>
+              {[
+                ["rajesh@adv.com", "Advertiser", "Demo@1234"],
+                ["priya@pub.com", "Publisher", "Demo@1234"]
+              ].map(([demoEmail, userType, demoPw]) => (
+                <div
+                  key={demoEmail}
+                  onClick={() => {
+                    setEmail(demoEmail);
+                    setPassword(demoPw);
+                    setError("");
+                  }}
+                  style={{ cursor: "pointer", color: "#4338CA", padding: "3px 0", fontWeight: 500 }}
+                >
+                  ▸ {demoEmail} <span style={{ color: p.muted, fontWeight: 400 }}>({userType}) — pw: {demoPw}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Error Message */}
+          {error && (
+            <div
+              style={{
+                background: "#FEF2F2",
+                border: "1px solid #FECACA",
+                borderRadius: 8,
+                padding: "10px 14px",
+                marginBottom: 16,
+                fontSize: 13,
+                color: "#991B1B",
+                fontWeight: 500,
+                display: "flex",
+                alignItems: "center",
+                gap: 8
+              }}
+            >
+              <span>⚠️</span>
+              {error}
+            </div>
+          )}
+
+          {/* Lockout Screen */}
+          {isLocked && (
+            <div
+              style={{
+                background: "#FFF7ED",
+                border: "1px solid #FED7AA",
+                borderRadius: 8,
+                padding: "10px 14px",
+                marginBottom: 16,
+                fontSize: 13,
+                color: "#92400E",
+                fontWeight: 600,
+                textAlign: "center"
+              }}
+            >
+              🔒 Account temporarily locked. Try again in 30 seconds.
+            </div>
+          )}
+
+          {/* Fields */}
+          {tab === "signup" && (
+            <div className="form-group">
+              <label className="label">Full Name</label>
+              <input
+                className="input"
+                placeholder="Your full name"
+                value={fullName}
+                onChange={E => {
+                  setFullName(E.target.value);
+                  setError("");
+                }}
+              />
+            </div>
+          )}
+
+          <div className="form-group">
+            <label className="label">Email Address</label>
+            <input
+              className="input"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={E => {
+                setEmail(E.target.value);
+                setError("");
+              }}
+              onKeyDown={E => E.key === "Enter" && handleLogin()}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="label">Password</label>
+            <div style={{ position: "relative" }}>
+              <input
+                className="input"
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
+                value={password}
+                onChange={E => {
+                  setPassword(E.target.value);
+                  setError("");
+                }}
+                onKeyDown={E => E.key === "Enter" && handleLogin()}
+                style={{ paddingRight: 44 }}
+              />
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: 16,
+                  color: p.muted
+                }}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
+            {tab === "signup" && (
+              <div style={{ fontSize: 11, color: p.muted, marginTop: 5 }}>
+                Min 6 characters required (demo rules)
+              </div>
+            )}
+          </div>
+
+          {/* Signup Type Selection */}
+          {tab === "signup" && (
+            <div className="form-group">
+              <label className="label">I want to</label>
+              <div style={{ display: "flex", gap: 8 }}>
+                {[
+                  ["advertiser", "📣 Buy Links"],
+                  ["publisher", "🌐 Sell Links"]
+                ].map(([rVal, rLabel]) => (
+                  <button
+                    key={rVal}
+                    onClick={() => setRole(rVal)}
+                    style={{
+                      flex: 1,
+                      padding: "10px",
+                      borderRadius: 8,
+                      border: `2px solid ${role === rVal ? p.accent : p.border}`,
+                      background: role === rVal ? p.accentLight : "white",
+                      color: role === rVal ? p.accent : p.muted,
+                      fontWeight: 600,
+                      fontSize: 13,
+                      cursor: "pointer",
+                      fontFamily: "'DM Sans',sans-serif"
+                    }}
+                  >
+                    {rLabel}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Submit */}
+          <button
+            onClick={handleLogin}
+            disabled={loading || isLocked}
+            style={{
+              width: "100%",
+              padding: "13px",
+              background: isLocked ? "#94A3B8" : "linear-gradient(135deg, #6366F1, #4338CA)",
+              color: "white",
+              border: "none",
+              borderRadius: 10,
+              fontWeight: 700,
+              fontSize: 15,
+              cursor: isLocked ? "not-allowed" : "pointer",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
+              marginTop: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8
+            }}
+          >
+            {loading ? (
+              <>
+                <span
+                  style={{
+                    width: 18,
+                    height: 18,
+                    border: "2px solid rgba(255,255,255,0.4)",
+                    borderTopColor: "white",
+                    borderRadius: "50%",
+                    display: "inline-block",
+                    animation: "spin 0.7s linear infinite"
+                  }}
+                />
+                Verifying...
+              </>
+            ) : tab === "login" ? (
+              "Sign In to Dashboard →"
+            ) : (
+              "Create Free Account →"
+            )}
+          </button>
+
+          {/* Helper Switcher */}
+          <div style={{ textAlign: "center", marginTop: 14, fontSize: 13, color: p.muted }}>
+            {tab === "login" ? (
+              <>
+                No account?{" "}
+                <span
+                  style={{ color: p.accent, cursor: "pointer", fontWeight: 600 }}
+                  onClick={() => {
+                    setTab("signup");
+                    setError("");
+                  }}
+                >
+                  Sign up free
+                </span>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <span
+                  style={{ color: p.accent, cursor: "pointer", fontWeight: 600 }}
+                  onClick={() => {
+                    setTab("login");
+                    setError("");
+                  }}
+                >
+                  Sign in
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Jp({pageId:e,onBack:t}: any){const r={privacy:{title:"Privacy Policy",icon:"🔒",updated:"June 1, 2026",sections:[{h:"1. Information We Collect",p:"We collect information you provide when registering on Authority Media Placement, including your full name, email address, role (advertiser or publisher), and PayPal account details for payment processing. We also collect usage data such as pages visited, orders placed, sites listed, and search queries within the platform."},{h:"2. How We Use Your Information",p:"Your information is used to: provide and operate our marketplace services; process payments securely via PayPal; send transactional emails regarding your orders, withdrawals, and account activity; improve platform features based on usage patterns; and communicate important platform updates. We never sell your personal data to third parties or use it for advertising purposes."},{h:"3. Payment Data & PayPal",p:"All payment processing is handled exclusively by PayPal. Authority Media Placement does not store, process, or have access to your credit card, debit card, or banking information. When you make a payment or receive a withdrawal, you are interacting directly with PayPal's secure infrastructure. PayPal's privacy policy governs the handling of your financial data."},{h:"4. Cookies & Local Storage",p:"We use browser localStorage to maintain your login session, save your platform preferences, and store registered user data for the demo environment. We do not use third-party tracking cookies, advertising cookies, or analytics cookies that track you across websites. Essential session data is stored locally on your device only."},{h:"5. Data Security",p:"We implement industry-standard security measures to protect your data: all connections are secured with SSL/TLS encryption; passwords are hashed using SHA-256 with unique salts and are never stored in plain text; brute-force login protection locks accounts after 5 failed attempts; and our platform is hosted on Vercel's secure, SOC 2-compliant infrastructure."},{h:"6. Data Sharing",p:"We do not sell, trade, or rent your personal information to third parties. We may share minimal necessary data with PayPal for payment processing, and with Vercel for hosting. We may disclose information if required by law or to protect the rights, property, or safety of our users or the platform."},{h:"7. Your Rights",p:"You have the right to: access your personal data held by us; request correction of inaccurate information; request deletion of your account and associated data; withdraw consent for data processing where applicable. To exercise these rights, please contact us at privacy@authorityplacement.com. We will respond within 30 days."},{h:"8. Contact",p:`For privacy-related questions or data requests:
 Email: privacy@authorityplacement.com
