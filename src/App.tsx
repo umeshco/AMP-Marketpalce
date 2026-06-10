@@ -152,7 +152,7 @@ const _p=`
 // All premium React functional view modules
 
 
-function lt({size:e="md",theme:t="dark"}: {size?: string, theme?: string}){const n={sm:{fontSize:19,dotSize:6,gap:1,tagSize:9},md:{fontSize:24,dotSize:7,gap:1,tagSize:10},lg:{fontSize:30,dotSize:9,gap:1,tagSize:11},xl:{fontSize:40,dotSize:11,gap:1,tagSize:13}},r=n[e]||n.md,i=t==="dark"?"#FFFFFF":"#0F172A",o="#6C63FF",s=t==="dark"?"rgba(255,255,255,0.38)":"rgba(15,23,42,0.38)";return l.jsxs("div",{style:{display:"inline-flex",flexDirection:"column",userSelect:"none",lineHeight:1},children:[l.jsxs("div",{style:{display:"flex",alignItems:"center",gap:0},children:[l.jsx("span",{style:{fontFamily:"'Plus Jakarta Sans', sans-serif",fontWeight:900,fontSize:r.fontSize,color:i,letterSpacing:"-0.8px",lineHeight:1},children:"authority"}),l.jsx("span",{style:{display:"inline-block",width:r.dotSize,height:r.dotSize,borderRadius:"50%",background:"#6C63FF",marginLeft:2,flexShrink:0,alignSelf:"flex-end",marginBottom:r.fontSize*.12}})]}),l.jsxs("div",{style:{display:"flex",alignItems:"center",gap:5,marginTop:r.tagSize*.3},children:[l.jsx("span",{style:{fontFamily:"'Plus Jakarta Sans', sans-serif",fontWeight:700,fontSize:r.tagSize,color:o,letterSpacing:"0.5px",textTransform:"uppercase"},children:"media"}),l.jsx("span",{style:{fontFamily:"'Plus Jakarta Sans', sans-serif",fontWeight:700,fontSize:r.tagSize,color:s,letterSpacing:"0.5px",textTransform:"uppercase"},children:"placement"})]})]})}
+function lt({size:e="md",theme:t="dark"}: {size?: string, theme?: string}){const n={sm:{fontSize:13,subtitleSize:8.2,iconSize:18,gap:8,letterSpacing:"1.2px"},md:{fontSize:17,subtitleSize:10,iconSize:22,gap:10,letterSpacing:"1.5px"},lg:{fontSize:21,subtitleSize:12.5,iconSize:28,gap:12,letterSpacing:"2px"},xl:{fontSize:29,subtitleSize:17,iconSize:36,gap:16,letterSpacing:"2.5px"}},r=n[e]||n.md,i=t==="dark"?"#FFFFFF":"#0F172A",subColor=t==="dark"?"#10B981":"#059669";return l.jsxs("div",{style:{display:"inline-flex",alignItems:"center",gap:r.gap,userSelect:"none",lineHeight:1.1},children:[l.jsxs("svg",{width:r.iconSize,height:r.iconSize,viewBox:"0 0 32 32",fill:"none",style:{flexShrink:0},children:[l.jsxs("defs",{children:[l.jsxs("linearGradient",{id:"gfPurple",x1:"0%",y1:"0%",x2:"100%",y2:"100%",children:[l.jsx("stop",{offset:"0%",stopColor:"#818CF8"}),l.jsx("stop",{offset:"100%",stopColor:"#4F46E5"})]}),l.jsxs("linearGradient",{id:"gfGreen",x1:"0%",y1:"0%",x2:"100%",y2:"100%",children:[l.jsx("stop",{offset:"0%",stopColor:"#34D399"}),l.jsx("stop",{offset:"100%",stopColor:"#059669"})]})]}),l.jsx("path",{d:"M6 24 C10 14, 18 10, 26 8",stroke:"url(#gfPurple)",strokeWidth:"3",strokeLinecap:"round"}),l.jsx("path",{d:"M10 24 L16 11 L22 24",stroke:"url(#gfPurple)",strokeWidth:"3",strokeLinecap:"round",strokeLinejoin:"round"}),l.jsx("circle",{cx:"16",cy:"11",r:"4",fill:"url(#gfGreen)",stroke:t==="dark"?"#1e293b":"#FFFFFF",strokeWidth:"1.5"}),l.jsx("circle",{cx:"22",cy:"24",r:"3",fill:"#34D399"})]}),l.jsxs("div",{style:{display:"flex",flexDirection:"column",gap:2,justifyContent:"center"},children:[l.jsx("span",{style:{fontFamily:"'Plus Jakarta Sans', sans-serif",fontWeight:900,fontSize:r.fontSize,color:i,letterSpacing:"0.5px",textTransform:"uppercase"},children:"AUTHORITY"}),l.jsx("span",{style:{fontFamily:"'Plus Jakarta Sans', sans-serif",fontWeight:700,fontSize:r.subtitleSize,color:subColor,letterSpacing:r.letterSpacing,textTransform:"uppercase"},children:"MEDIA PLACEMENT"})]})]})}
 function Si({status:e}: {status: string}){const t={approved:["badge-success","✓ Approved"],pending:["badge-warning","⏳ Pending"],rejected:["badge-danger","✕ Rejected"],completed:["badge-success","✓ Completed"],in_progress:["badge-info","● In Progress"],cancelled:["badge-danger","✕ Cancelled"],refunded:["badge-gray","💸 Refunded (PayPal)"],failed:["badge-danger","✕ Failed (Revoked)"]},[n,r]=t[e]||["badge-gray",e];return l.jsx("span",{className:`badge ${n}`,children:r})}
 
 export function FAQItem({ question, answer }: { question: string; answer: string }) {
@@ -238,6 +238,19 @@ function Gp({sites:e,setSites:t}: any){
   const [n, r] = T.useState("all");
   const [i, o] = T.useState<any>(null);
   const [s, a] = T.useState("");
+  const [editingSite, setEditingSite] = T.useState<any>(null);
+  const [showEditSiteModal, setShowEditSiteModal] = T.useState(false);
+
+  const saveEditedSite = () => {
+    if (!editingSite.domain.trim()) {
+      alert("Domain cannot be empty.");
+      return;
+    }
+    const updated = e.map((x: any) => x.id === editingSite.id ? editingSite : x);
+    y(updated);
+    setShowEditSiteModal(false);
+    m(`✓ "${editingSite.domain}" updated successfully!`);
+  };
 
   const y = (c: any) => {
     t(c);
@@ -404,6 +417,14 @@ function Gp({sites:e,setSites:t}: any){
                             c.status !== "approved" && l.jsx("button", { className: "btn btn-sm btn-success", onClick: () => w(c), children: "✓ Approve" }),
                             c.status !== "rejected" && l.jsx("button", { className: "btn btn-sm btn-danger", onClick: () => N(c), children: "✕ Reject" }),
                             c.status !== "pending" && l.jsx("button", { className: "btn btn-sm btn-outline", onClick: () => v(c), children: "↺ Reset" }),
+                            l.jsx("button", {
+                              className: "btn btn-sm btn-outline",
+                              onClick: () => {
+                                setEditingSite(c);
+                                setShowEditSiteModal(true);
+                              },
+                              children: "Edit"
+                            }),
                             l.jsx("button", { className: "btn btn-sm", onClick: () => k(c), style: { background: "#FEF2F2", color: "#EF4444", border: "1px solid #FECACA", cursor: "pointer" }, children: "🗑" })
                           ]
                         })
@@ -419,12 +440,154 @@ function Gp({sites:e,setSites:t}: any){
       i && l.jsx("div", {
         style: { position: "fixed", bottom: 24, right: 24, zIndex: 9999, background: i.type === "error" ? p.danger : p.success, color: "white", padding: "13px 22px", borderRadius: 10, fontWeight: 600, fontSize: 14, boxShadow: "0 4px 20px rgba(0,0,0,0.2)", maxWidth: 400 },
         children: i.msg
-      })
+      }),
+      showEditSiteModal && editingSite && (
+        l.jsx("div", {
+          className: "modal-overlay",
+          onClick: evt => evt.target === evt.currentTarget && setShowEditSiteModal(false),
+          children: l.jsxs("div", {
+            className: "modal",
+            style: { maxWidth: 460 },
+            children: [
+              l.jsxs("div", {
+                className: "modal-header",
+                children: [
+                  l.jsxs("span", { className: "modal-title", children: ["✏️ Edit Website — ", editingSite.domain] }),
+                  l.jsx("button", { className: "btn btn-ghost btn-sm", onClick: () => setShowEditSiteModal(false), children: "✕" })
+                ]
+              }),
+              l.jsxs("div", {
+                className: "modal-body",
+                children: [
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Domain" }),
+                      l.jsx("input", {
+                        className: "input",
+                        value: editingSite.domain,
+                        onChange: evt => setEditingSite({ ...editingSite, domain: evt.target.value })
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Niche" }),
+                      l.jsx("input", {
+                        className: "input",
+                        value: editingSite.niche,
+                        onChange: evt => setEditingSite({ ...editingSite, niche: evt.target.value })
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
+                    children: [
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "DA" }),
+                          l.jsx("input", {
+                            className: "input",
+                            type: "number",
+                            value: editingSite.da,
+                            onChange: evt => setEditingSite({ ...editingSite, da: parseInt(evt.target.value) || 0 })
+                          })
+                        ]
+                      }),
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "DR" }),
+                          l.jsx("input", {
+                            className: "input",
+                            type: "number",
+                            value: editingSite.dr,
+                            onChange: evt => setEditingSite({ ...editingSite, dr: parseInt(evt.target.value) || 0 })
+                          })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
+                    children: [
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "Traffic" }),
+                          l.jsx("input", {
+                            className: "input",
+                            type: "number",
+                            value: editingSite.traffic,
+                            onChange: evt => setEditingSite({ ...editingSite, traffic: parseInt(evt.target.value) || 0 })
+                          })
+                        ]
+                      }),
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "Price ($)" }),
+                          l.jsx("input", {
+                            className: "input",
+                            type: "number",
+                            value: editingSite.price,
+                            onChange: evt => setEditingSite({ ...editingSite, price: parseInt(evt.target.value) || 0 })
+                          })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Link Type" }),
+                      l.jsxs("select", {
+                        className: "select",
+                        value: editingSite.dofollow ? "true" : "false",
+                        onChange: evt => setEditingSite({ ...editingSite, dofollow: evt.target.value === "true" }),
+                        children: [
+                          l.jsx("option", { value: "true", children: "DoFollow" }),
+                          l.jsx("option", { value: "false", children: "NoFollow" })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Account Status" }),
+                      l.jsxs("select", {
+                        className: "select",
+                        value: editingSite.status || "pending",
+                        onChange: evt => setEditingSite({ ...editingSite, status: evt.target.value }),
+                        children: [
+                          l.jsx("option", { value: "approved", children: "✅ Approved" }),
+                          l.jsx("option", { value: "pending", children: "⏳ Pending" }),
+                          l.jsx("option", { value: "rejected", children: "✕ Rejected" })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    style: { display: "flex", gap: 10, marginTop: 24 },
+                    children: [
+                      l.jsx("button", { className: "btn btn-primary", style: { flex: 1 }, onClick: saveEditedSite, children: "Save Changes" }),
+                      l.jsx("button", { className: "btn btn-outline", onClick: () => setShowEditSiteModal(false), children: "Cancel" })
+                    ]
+                  })
+                ]
+              })
+            ]
+          })
+        })
+      )
     ]
   });
 }
 
-function Qp(){
+function Qp({ onLoginAs }: any){
   const [activeTab, setActiveTab] = T.useState("all");
   const [users, setUsers] = T.useState<any[]>([]);
   const [searchQuery, setSearchQuery] = T.useState("");
@@ -453,7 +616,7 @@ function Qp(){
     
     // Merge defaults with local overrides
     defaultList.forEach(u => {
-      const override = localUsers[u.email.toLowerCase()];
+      const override = localUsers[u.id] || localUsers[u.email.toLowerCase()];
       if (override) {
         mergedList.push({
           ...u,
@@ -466,12 +629,14 @@ function Qp(){
       }
     });
 
-    // Add other dynamic users from local registry
+    const defaultIds = new Set(defaultList.map(u => u.id));
     const defaultEmails = new Set(defaultList.map(u => u.email.toLowerCase()));
+
+    // Add other dynamic users from local registry
     Object.values(localUsers).forEach((u: any) => {
-      if (!defaultEmails.has(u.email.toLowerCase())) {
+      if (u && u.id && !defaultIds.has(u.id) && !defaultEmails.has(u.email.toLowerCase())) {
         mergedList.push({
-          id: u.id || "user_" + Date.now(),
+          id: u.id,
           name: u.name,
           email: u.email,
           role: u.role,
@@ -498,9 +663,9 @@ function Qp(){
     } catch {}
 
     updatedList.forEach(currUser => {
-      const emailKey = currUser.email.toLowerCase();
-      const oldEntry = existing[emailKey] || {};
-      existing[emailKey] = {
+      const idKey = currUser.id;
+      const oldEntry = existing[idKey] || existing[currUser.email.toLowerCase()] || {};
+      const updatedRecord = {
         ...oldEntry,
         id: currUser.id,
         name: currUser.name,
@@ -512,6 +677,9 @@ function Qp(){
         activity: currUser.activity || oldEntry.activity || "New user",
         password: oldEntry.password || "Demo@1234"
       };
+      
+      existing[idKey] = updatedRecord;
+      existing[currUser.email.toLowerCase()] = updatedRecord;
     });
 
     try {
@@ -728,6 +896,18 @@ function Qp(){
                               className: "btn btn-sm btn-outline",
                               onClick: () => handleEditClick(u),
                               children: "Edit"
+                            }),
+                            u.role !== "admin" && l.jsx("button", {
+                              className: "btn btn-sm",
+                              style: {
+                                color: p.accent,
+                                background: p.accentLight,
+                                fontWeight: 600,
+                                border: "none",
+                                cursor: "pointer"
+                              },
+                              onClick: () => onLoginAs && onLoginAs(u),
+                              children: "Access Panel 🔑"
                             }),
                             l.jsx("button", {
                               className: "btn btn-sm",
@@ -1612,7 +1792,8 @@ function Zp(){const[e,t]=T.useState(""),[n,r]=T.useState(""),[i,o]=T.useState(""
 
 ${y}
 
-Copy this hash → open src/App.jsx → find CREDENTIALS["admin@authorityplacement.com"].hash → replace the value → redeploy to Vercel.`})};return l.jsxs("div",{className:"page",children:[l.jsxs("div",{className:"page-header",children:[l.jsx("div",{className:"page-title",children:"⚙️ Admin Settings"}),l.jsx("div",{className:"page-subtitle",children:"Manage admin credentials and platform configuration"})]}),l.jsxs("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20},children:[l.jsxs("div",{className:"card",children:[l.jsx("div",{className:"card-header",children:l.jsx("span",{className:"card-title",children:"🔒 Change Admin Password"})}),l.jsxs("div",{className:"card-body",children:[l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Current Password"}),l.jsx("input",{className:"input",type:"password",placeholder:"Your current password",value:e,onChange:d=>t(d.target.value)})]}),l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"New Password"}),l.jsx("input",{className:"input",type:"password",placeholder:"Min 8 characters",value:n,onChange:d=>r(d.target.value)})]}),l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Confirm New Password"}),l.jsx("input",{className:"input",type:"password",placeholder:"Repeat new password",value:i,onChange:d=>o(d.target.value)})]}),s&&l.jsx("div",{style:{background:s.type==="error"?p.dangerLight:p.successLight,border:`1px solid ${s.type==="error"?"#FECACA":"#A7F3D0"}`,borderRadius:8,padding:"12px 14px",marginBottom:14,fontSize:13,color:s.type==="error"?"#991B1B":"#065F46",whiteSpace:"pre-wrap",wordBreak:"break-all",lineHeight:1.6},children:s.text}),l.jsx("button",{className:"btn btn-primary",onClick:u,children:"Generate New Password Hash"}),l.jsxs("div",{style:{marginTop:12,fontSize:12,color:p.muted,lineHeight:1.7},children:["💡 After copying the hash, update it in ",l.jsx("code",{style:{background:"#F1F5F9",padding:"1px 5px",borderRadius:4},children:"src/App.jsx"})," under ",l.jsx("code",{style:{background:"#F1F5F9",padding:"1px 5px",borderRadius:4},children:'CREDENTIALS["admin@..."].hash'})," and redeploy."]})]})]}),l.jsxs("div",{className:"card",children:[l.jsx("div",{className:"card-header",children:l.jsx("span",{className:"card-title",children:"🔐 Admin Access Info"})}),l.jsxs("div",{className:"card-body",children:[l.jsxs("div",{style:{background:p.warningLight,border:"1px solid #FDE68A",borderRadius:10,padding:14,marginBottom:16},children:[l.jsx("div",{style:{fontWeight:700,fontSize:13,color:"#92400E",marginBottom:8},children:"⚠️ Secret Admin Login URL"}),l.jsxs("div",{style:{fontSize:13,color:"#92400E",lineHeight:1.7},children:["Your admin panel is accessible at:",l.jsx("br",{}),l.jsx("code",{style:{background:"#FFFBEB",padding:"2px 6px",borderRadius:4},children:"/?admin=1"})]})]})]})]})]})]})}function Ef(){var f,c,h;const[e,t]=T.useState<any>(null),[n,r]=T.useState("dashboard"),[i,o]=T.useState(()=>{try{const x=localStorage.getItem("amp_sites");return x?JSON.parse(x):Js}catch{return Js}}),s=x=>{o(g=>{const j=typeof x=="function"?x(g):x;try{localStorage.setItem("amp_sites",JSON.stringify(j))}catch{}return j})},[a,u]=T.useState(Ip),[d,y]=T.useState(null);if(typeof window<"u"&&new URLSearchParams(window.location.search).get("admin")==="1"&&!e)return l.jsx(qp,{onLogin:x=>{t(x),window.history.replaceState({},"","/")}});const w=(x,g="success")=>{y({msg:x,type:g}),setTimeout(()=>y(null),3e3)},N=({site:x,type:g,amount:orderedPrice}: any)=>{const finalAmt=orderedPrice||x.price;const j={id:`ORD-00${a.length+1}`,site:x.domain,advertiser:e.id,publisher:x.publisher,amount:finalAmt,commission:finalAmt*.1,publisherEarning:finalAmt*.9,status:"pending",date:new Date().toISOString().split("T")[0],type:g};u(S=>[...S,j]),w(`Order placed for ${x.domain}! Payment via PayPal.`)},v={admin:[{id:"dashboard",icon:"🏠",label:"Dashboard"},{id:"sites_admin",icon:"🌐",label:"Sites",section:"Management"},{id:"users_admin",icon:"👥",label:"Users"},{id:"orders_admin",icon:"📦",label:"All Orders"},{id:"marketplace",icon:"🛒",label:"Marketplace",section:"Platform"},{id:"wallet",icon:"👜",label:"Wallet"},{id:"settings_admin",icon:"⚙️",label:"Settings",section:"Admin"}],advertiser:[{id:"dashboard",icon:"🏠",label:"Dashboard"},{id:"marketplace",icon:"🛒",label:"Marketplace",section:"Discover"},{id:"sites_admin",icon:"🌐",label:"Sites Management",section:"Admin Panel"},{id:"orders",icon:"📦",label:"My Orders",section:"Account"},{id:"wallet",icon:"👜",label:"Wallet"}],publisher:[{id:"dashboard",icon:"🏠",label:"Dashboard"},{id:"sites",icon:"🌐",label:"My Sites",section:"Portfolio"},{id:"orders",icon:"📦",label:"Orders",section:"Account"},{id:"wallet",icon:"👜",label:"Wallet"}]};if(!e)return l.jsx(Xp,{onLogin:x=>{t(x),r("dashboard")}});const k=v[e.role]||v.advertiser,z={dashboard:"Dashboard",marketplace:"Marketplace",sites:"My Sites",sites_admin:"Sites Management",users_admin:"Users",orders:"Orders",orders_admin:"All Orders",wallet:"Wallet",settings_admin:"Admin Settings"}[n]||"Dashboard";return l.jsxs(l.Fragment,{children:[l.jsx("style",{children:_p}),l.jsxs("div",{style:{display:"flex"},children:[l.jsxs("div",{className:"sidebar",children:[l.jsx("div",{className:"sidebar-logo",children:l.jsx(lt,{size:"sm",theme:"dark"})}),l.jsx("div",{className:"sidebar-nav",children:k.map((x,g)=>l.jsxs("div",{children:[x.section&&l.jsx("div",{className:"nav-section",children:x.section}),l.jsxs("div",{className:`nav-item ${n===x.id?"active":""}`,onClick:()=>r(x.id),children:[l.jsx("span",{className:"nav-icon",children:x.icon}),x.label]})]},x.id))}),l.jsx("div",{style:{padding:"16px 12px",borderTop:"1px solid rgba(255,255,255,0.1)"},children:l.jsxs("div",{style:{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",borderRadius:8,cursor:"pointer"},onClick:()=>t(null),children:[l.jsx("div",{className:"avatar",children:((f=e.name)==null?void 0:f[0])||"U"}),l.jsxs("div",{style:{flex:1,minWidth:0},children:[l.jsx("div",{style:{fontSize:13,fontWeight:600,color:"white",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"},children:e.name}),l.jsx("div",{style:{fontSize:11,color:"#64748B",textTransform:"capitalize"},children:e.role})]}),l.jsx("span",{style:{fontSize:12,color:"#64748B"},children:"⏻"})]})})]}),l.jsxs("div",{className:"main",children:[l.jsxs("div",{className:"topbar",children:[l.jsx("div",{className:"topbar-title",children:z}),l.jsxs("div",{className:"topbar-right",children:[l.jsxs("div",{style:{fontSize:13,color:p.muted},children:["💰 $",((c=e.wallet)==null?void 0:c.toFixed(2))||"0.00"," wallet"]}),l.jsxs("div",{className:"user-badge",children:[l.jsx("div",{className:"avatar",children:((h=e.name)==null?void 0:h[0])||"U"}),l.jsxs("div",{children:[l.jsx("div",{className:"user-name",children:e.name}),l.jsx("div",{className:"user-role",children:e.role})]})]})]})]}),n==="dashboard"&&l.jsx($p,{user:e,sites:i,orders:a}),n==="marketplace"&&l.jsx(Hp,{sites:i,user:e,onOrder:N}),n==="sites"&&l.jsx(Up,{sites:i,setSites:s,user:e}),n==="sites_admin"&&l.jsx(Gp,{sites:i,setSites:s}),n==="users_admin"&&l.jsx(Qp,{}),(n==="orders"||n==="orders_admin")&&l.jsx(Vp,{orders:a,user:e}),n==="settings_admin"&&l.jsx(Zp,{}),n==="wallet"&&l.jsx(Yp,{user:e})]})]}),d&&l.jsxs("div",{style:{position:"fixed",bottom:24,right:24,background:p.success,color:"white",padding:"12px 20px",borderRadius:10,fontWeight:600,fontSize:14,zIndex:999,boxShadow:"0 4px 20px rgba(0,0,0,0.2)",animation:"slideIn 0.3s ease"},children:["✓ ",d.msg]})]})}
+Copy this hash → open src/App.jsx → find CREDENTIALS["admin@authorityplacement.com"].hash → replace the value → redeploy to Vercel.`})};return l.jsxs("div",{className:"page",children:[l.jsxs("div",{className:"page-header",children:[l.jsx("div",{className:"page-title",children:"⚙️ Admin Settings"}),l.jsx("div",{className:"page-subtitle",children:"Manage admin credentials and platform configuration"})]}),l.jsxs("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20},children:[l.jsxs("div",{className:"card",children:[l.jsx("div",{className:"card-header",children:l.jsx("span",{className:"card-title",children:"🔒 Change Admin Password"})}),l.jsxs("div",{className:"card-body",children:[l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Current Password"}),l.jsx("input",{className:"input",type:"password",placeholder:"Your current password",value:e,onChange:d=>t(d.target.value)})]}),l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"New Password"}),l.jsx("input",{className:"input",type:"password",placeholder:"Min 8 characters",value:n,onChange:d=>r(d.target.value)})]}),l.jsxs("div",{className:"form-group",children:[l.jsx("label",{className:"label",children:"Confirm New Password"}),l.jsx("input",{className:"input",type:"password",placeholder:"Repeat new password",value:i,onChange:d=>o(d.target.value)})]}),s&&l.jsx("div",{style:{background:s.type==="error"?p.dangerLight:p.successLight,border:`1px solid ${s.type==="error"?"#FECACA":"#A7F3D0"}`,borderRadius:8,padding:"12px 14px",marginBottom:14,fontSize:13,color:s.type==="error"?"#991B1B":"#065F46",whiteSpace:"pre-wrap",wordBreak:"break-all",lineHeight:1.6},children:s.text}),l.jsx("button",{className:"btn btn-primary",onClick:u,children:"Generate New Password Hash"}),l.jsxs("div",{style:{marginTop:12,fontSize:12,color:p.muted,lineHeight:1.7},children:["💡 After copying the hash, update it in ",l.jsx("code",{style:{background:"#F1F5F9",padding:"1px 5px",borderRadius:4},children:"src/App.jsx"})," under ",l.jsx("code",{style:{background:"#F1F5F9",padding:"1px 5px",borderRadius:4},children:'CREDENTIALS["admin@..."].hash'})," and redeploy."]})]})]}),l.jsxs("div",{className:"card",children:[l.jsx("div",{className:"card-header",children:l.jsx("span",{className:"card-title",children:"🔐 Admin Access Info"})}),l.jsxs("div",{className:"card-body",children:[l.jsxs("div",{style:{background:p.warningLight,border:"1px solid #FDE68A",borderRadius:10,padding:14,marginBottom:16},children:[l.jsx("div",{style:{fontWeight:700,fontSize:13,color:"#92400E",marginBottom:8},children:"⚠️ Secret Admin Login URL"}),l.jsxs("div",{style:{fontSize:13,color:"#92400E",lineHeight:1.7},children:["Your admin panel is accessible at:",l.jsx("br",{}),l.jsx("code",{style:{background:"#FFFBEB",padding:"2px 6px",borderRadius:4},children:"/?admin=1"})]})]})]})]})]})]})}function Ef(){var f,c,h;const[e,t]=T.useState<any>(null),[n,r]=T.useState("dashboard"),[i,o]=T.useState(()=>{try{const x=localStorage.getItem("amp_sites");return x?JSON.parse(x):Js}catch{return Js}}),s=x=>{o(g=>{const j=typeof x=="function"?x(g):x;try{localStorage.setItem("amp_sites",JSON.stringify(j))}catch{}return j})},[a,u]=T.useState(Ip),[d,y]=T.useState(null);
+const [impersonatingAdmin, setImpersonatingAdmin] = T.useState<any>(null);if(typeof window<"u"&&new URLSearchParams(window.location.search).get("admin")==="1"&&!e)return l.jsx(qp,{onLogin:x=>{t(x),window.history.replaceState({},"","/")}});const w=(x,g="success")=>{y({msg:x,type:g}),setTimeout(()=>y(null),3e3)},N=({site:x,type:g,amount:orderedPrice}: any)=>{const finalAmt=orderedPrice||x.price;const j={id:`ORD-00${a.length+1}`,site:x.domain,advertiser:e.id,publisher:x.publisher,amount:finalAmt,commission:finalAmt*.1,publisherEarning:finalAmt*.9,status:"pending",date:new Date().toISOString().split("T")[0],type:g};u(S=>[...S,j]),w(`Order placed for ${x.domain}! Payment via PayPal.`)},v={admin:[{id:"dashboard",icon:"🏠",label:"Dashboard"},{id:"sites_admin",icon:"🌐",label:"Sites",section:"Management"},{id:"users_admin",icon:"👥",label:"Users"},{id:"orders_admin",icon:"📦",label:"All Orders"},{id:"marketplace",icon:"🛒",label:"Marketplace",section:"Platform"},{id:"wallet",icon:"👜",label:"Wallet"},{id:"settings_admin",icon:"⚙️",label:"Settings",section:"Admin"}],advertiser:[{id:"dashboard",icon:"🏠",label:"Dashboard"},{id:"marketplace",icon:"🛒",label:"Marketplace",section:"Discover"},{id:"sites_admin",icon:"🌐",label:"Sites Management",section:"Admin Panel"},{id:"orders",icon:"📦",label:"My Orders",section:"Account"},{id:"wallet",icon:"👜",label:"Wallet"}],publisher:[{id:"dashboard",icon:"🏠",label:"Dashboard"},{id:"sites",icon:"🌐",label:"My Sites",section:"Portfolio"},{id:"orders",icon:"📦",label:"Orders",section:"Account"},{id:"wallet",icon:"👜",label:"Wallet"}]};if(!e)return l.jsx(Xp,{onLogin:x=>{t(x),r("dashboard")}});const k=v[e.role]||v.advertiser,z={dashboard:"Dashboard",marketplace:"Marketplace",sites:"My Sites",sites_admin:"Sites Management",users_admin:"Users",orders:"Orders",orders_admin:"All Orders",wallet:"Wallet",settings_admin:"Admin Settings"}[n]||"Dashboard";return l.jsxs(l.Fragment,{children:[l.jsx("style",{children:_p}),l.jsxs("div",{style:{display:"flex"},children:[l.jsxs("div",{className:"sidebar",children:[l.jsx("div",{className:"sidebar-logo",children:l.jsx(lt,{size:"sm",theme:"dark"})}),l.jsx("div",{className:"sidebar-nav",children:k.map((x,g)=>l.jsxs("div",{children:[x.section&&l.jsx("div",{className:"nav-section",children:x.section}),l.jsxs("div",{className:`nav-item ${n===x.id?"active":""}`,onClick:()=>r(x.id),children:[l.jsx("span",{className:"nav-icon",children:x.icon}),x.label]})]},x.id))}),l.jsx("div",{style:{padding:"16px 12px",borderTop:"1px solid rgba(255,255,255,0.1)"},children:l.jsxs("div",{style:{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",borderRadius:8,cursor:"pointer"},onClick:()=>{t(null);setImpersonatingAdmin(null);},children:[l.jsx("div",{className:"avatar",children:((f=e.name)==null?void 0:f[0])||"U"}),l.jsxs("div",{style:{flex:1,minWidth:0},children:[l.jsx("div",{style:{fontSize:13,fontWeight:600,color:"white",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"},children:e.name}),l.jsx("div",{style:{fontSize:11,color:"#64748B",textTransform:"capitalize"},children:e.role})]}),l.jsx("span",{style:{fontSize:12,color:"#64748B"},children:"⏻"})]})})]}),l.jsxs("div",{className:"main",children:[impersonatingAdmin&&l.jsxs("div",{style:{background:"linear-gradient(135deg, #4f46e5, #312e81)",color:"white",padding:"12px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",borderBottom:"1px solid rgba(255,255,255,0.15)",position:"relative",zIndex:1000},children:[l.jsxs("div",{style:{display:"flex",alignItems:"center",gap:10},children:[l.jsx("span",{style:{fontSize:16},children:"🔑"}),l.jsxs("span",{style:{fontWeight:700,fontSize:14,fontFamily:"'Plus Jakarta Sans',sans-serif"},children:["Impersonation Mode: Logged in as ",l.jsx("strong",{children:e.name})," (",l.jsx("span",{style:{textTransform:"capitalize"},children:e.role}),")"]})]}),l.jsx("button",{className:"btn btn-sm",style:{background:"white",color:"#312e81",fontWeight:700,border:"none"},onClick:()=>{t(impersonatingAdmin);setImpersonatingAdmin(null);r("users_admin");w("Returned to Admin successfully.");},children:"↩ Return to Admin Panel"})]}),l.jsxs("div",{className:"topbar",children:[l.jsx("div",{className:"topbar-title",children:z}),l.jsxs("div",{className:"topbar-right",children:[l.jsxs("div",{style:{fontSize:13,color:p.muted},children:["💰 $",((c=e.wallet)==null?void 0:c.toFixed(2))||"0.00"," wallet"]}),l.jsxs("div",{className:"user-badge",children:[l.jsx("div",{className:"avatar",children:((h=e.name)==null?void 0:h[0])||"U"}),l.jsxs("div",{children:[l.jsx("div",{className:"user-name",children:e.name}),l.jsx("div",{className:"user-role",children:e.role})]})]})]})]}),n==="dashboard"&&l.jsx($p,{user:e,sites:i,orders:a}),n==="marketplace"&&l.jsx(Hp,{sites:i,user:e,onOrder:N}),n==="sites"&&l.jsx(Up,{sites:i,setSites:s,user:e}),n==="sites_admin"&&l.jsx(Gp,{sites:i,setSites:s}),n==="users_admin"&&l.jsx(Qp,{onLoginAs:x=>{setImpersonatingAdmin(e);t(x);r("dashboard");w(`Logged in as "${x.name}" successfully.`);}}),(n==="orders"||n==="orders_admin")&&l.jsx(Vp,{orders:a,user:e}),n==="settings_admin"&&l.jsx(Zp,{}),n==="wallet"&&l.jsx(Yp,{user:e})]})]}),d&&l.jsxs("div",{style:{position:"fixed",bottom:24,right:24,background:p.success,color:"white",padding:"12px 20px",borderRadius:10,fontWeight:600,fontSize:14,zIndex:999,boxShadow:"0 4px 20px rgba(0,0,0,0.2)",animation:"slideIn 0.3s ease"},children:["✓ ",d.msg]})]})}
 
 // Default export wrapper
 export default function App() {
