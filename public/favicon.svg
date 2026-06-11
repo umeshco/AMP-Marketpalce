@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient: Deep rich slate leading to royal indigo -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E1B4B" />
+      <stop offset="100%" stop-color="#312E81" />
+    </linearGradient>
+    
+    <!-- Accent Gradient: Electric indigo to neon violet/teal of authority growth -->
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Gold Gradient for Majestic Star/Crown Authority -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+
+    <!-- Drop Shadow effect for 3D realism -->
+    <filter id="outerShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container with dark theme -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
+
+  <!-- Outer polished glow ring -->
+  <circle cx="256" cy="256" r="216" fill="none" stroke="url(#accentGrad)" stroke-width="12" stroke-linecap="round" opacity="0.85" />
+  
+  <g filter="url(#outerShadow)">
+    <!-- Main Crown / Star Symbol pointing high (Authority Placement) -->
+    <!-- The letter A designed as an ascending upward peak / mountain of SEO growth -->
+    <path d="M256 90 L390 350 L315 350 L256 220 L197 350 L122 350 Z" fill="url(#accentGrad)" />
+    
+    <!-- Center Premium Inner Starburst / Point of light -->
+    <path d="M256 120 L275 180 L335 180 L285 215 L305 275 L256 240 L207 275 L227 215 L177 180 L237 180 Z" fill="url(#goldGrad)" />
+
+    <!-- A horizontal base bar indicating link anchor placement -->
+    <rect x="170" y="380" width="172" height="18" rx="9" fill="#FFFFFF" opacity="0.9" />
+  </g>
+</svg>
