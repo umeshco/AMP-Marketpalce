@@ -82,22 +82,39 @@ export function getEmailTemplate(type: string, data: { name: string; email: stri
     `;
   } else if (type === "approved") {
     accentColor = "#10b981"; // Success Emerald
-    title = "🎉 Your Account has been Approved!";
+    title = `🎉 Your ${data.role === "publisher" ? "Publisher" : "Advertiser"} Account has been Approved!`;
+    const actionBlock = data.role === "publisher"
+      ? `<p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
+          Congratulations! Your <strong>publisher account</strong> has been approved. You are now ready to <strong>add your high-authority website(s)</strong> to start listing your inventory, specifying your pricing tiers, and answering guest post orders. Let's make your web domains highly visible and monetize your digital authority today!
+         </p>
+         <div style="background-color: #ecfdf5; border-left: 4px solid ${accentColor}; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
+           <p style="margin: 0; font-size: 14px; color: #065f46; font-weight: bold;">
+             🌐 Next Step: Add Your First Site
+           </p>
+           <p style="margin: 6px 0 0 0; font-size: 13.5px; color: #047857; line-height: 1.5;">
+             Go to the <strong>"My Sites"</strong> tab, list your URL, and let our engine automatically fetch up-to-date Ahrefs and Moz metrics to attract premium buyers in no time.
+           </p>
+         </div>`
+      : `<p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
+          Congratulations! Your <strong>advertiser account</strong> has been approved. You can now access our <strong>curated private marketplace</strong> to browse verified sites and select premium guest post slots as per your exact requirements.
+         </p>
+         <div style="background-color: #ecfdf5; border-left: 4px solid ${accentColor}; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
+           <p style="margin: 0; font-size: 14px; color: #065f46; font-weight: bold;">
+             🛍️ Next Step: Browse Hand-Vetted Publishers
+           </p>
+           <p style="margin: 6px 0 0 0; font-size: 13.5px; color: #047857; line-height: 1.5;">
+             Head to the <strong>"Marketplace"</strong> tab to filter thousands of high-DR blogs by niche, budget, and SEO authority. As a special welcome, we have credited your sandbox wallet with <strong>$1,000.00</strong> to test place orders!
+           </p>
+         </div>`;
+
     bodyContent = `
       <p style="font-size: 16px; line-height: 1.6; color: #1e293b; margin-bottom: 16px;">Hello <strong>${data.name}</strong>,</p>
       <p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
         We have fantastic news! Our administrative review of your application is complete, and your account on <strong>Authority Media Placement</strong> has been successfully <strong>APPROVED</strong>.
       </p>
-      <div style="background-color: #ecfdf5; border-left: 4px solid ${accentColor}; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
-        <p style="margin: 0; font-size: 14px; color: #065f46; font-weight: bold;">
-          ✓ Account Type: <span style="text-transform: capitalize;">${data.role}</span> (Approved & Active)
-        </p>
-        <p style="margin: 6px 0 0 0; font-size: 13px; color: #047857; line-height: 1.5;">
-          You now have complete clearance to log in, access our premium publisher catalog or list your blogs, set up your wallet funds, and coordinate orders.
-        </p>
-      </div>
+      ${actionBlock}
       <p style="font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 24px;">
-        Click the login button below to access your fully authorized dashboard.
+        Click the login button below to access your fully authorized, active dashboard.
       </p>
       <div style="text-align: center; margin-bottom: 20px;">
         <a href="${typeof window !== 'undefined' ? window.location.origin : ''}" style="background-color: ${accentColor}; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Access My Active Dashboard →</a>
@@ -1434,35 +1451,57 @@ function Qp({ onLoginAs }: any){
     setUsers(mergedList);
   };
 
-  const handleApproveUser = (u: any) => {
+  const handleApproveUser = async (u: any) => {
     const updated = users.map(userItem => userItem.id === u.id ? { ...userItem, status: "approved", activity: "Approved by Admin" } : userItem);
     saveUsersToStorage(updated);
     
-    sendEmailNotification({
-      to: u.email,
-      subject: "🎉 Your Account has been Approved! - Authority Media Placement",
-      html: getEmailTemplate("approved", { name: u.name, email: u.email, role: u.role }),
-      category: "approved"
-    });
-    
-    showToastMessage(`User "${u.name}" has been approved successfully! Announcement email sent.`, "success");
+    try {
+      const res = await sendEmailNotification({
+        to: u.email,
+        subject: "🎉 Your Account has been Approved! - Authority Media Placement",
+        html: getEmailTemplate("approved", { name: u.name, email: u.email, role: u.role }),
+        category: "approved"
+      });
+      if (res && res.success) {
+        if (res.mode === "simulated") {
+          showToastMessage(`User "${u.name}" has been approved successfully! (${res.message})`, "success");
+        } else {
+          showToastMessage(`User "${u.name}" has been approved successfully! Real approval email notification sent to ${u.email}.`, "success");
+        }
+      } else {
+        showToastMessage(`User approved, but notification email delivery failed: ${res?.error || res?.message || "Check SMTP logs"}`, "error");
+      }
+    } catch (e: any) {
+      showToastMessage(`User approved, but notification email failed: ${e.message || e}`, "error");
+    }
   };
 
-  const handleRejectUser = (u: any) => {
+  const handleRejectUser = async (u: any) => {
     const reason = window.prompt("Optional: Enter decline reason for the rejection email:", "Our quality criteria requirements were not met.");
     if (reason === null) return;
     
     const updated = users.map(userItem => userItem.id === u.id ? { ...userItem, status: "rejected", activity: "Declined by Admin" } : userItem);
     saveUsersToStorage(updated);
     
-    sendEmailNotification({
-      to: u.email,
-      subject: "Update regarding your application - Authority Media Placement",
-      html: getEmailTemplate("rejected", { name: u.name, email: u.email, role: u.role, reason }),
-      category: "rejected"
-    });
-    
-    showToastMessage(`User "${u.name}" was rejected. Notification email sent.`, "error");
+    try {
+      const res = await sendEmailNotification({
+        to: u.email,
+        subject: "Update regarding your application - Authority Media Placement",
+        html: getEmailTemplate("rejected", { name: u.name, email: u.email, role: u.role, reason }),
+        category: "rejected"
+      });
+      if (res && res.success) {
+        if (res.mode === "simulated") {
+          showToastMessage(`User application rejected. (${res.message})`, "error");
+        } else {
+          showToastMessage(`User "${u.name}" rejected. Real decline notification email sent to ${u.email}.`, "error");
+        }
+      } else {
+        showToastMessage(`User rejected, but rejection email delivery failed: ${res?.error || res?.message || "Check SMTP logs"}`, "error");
+      }
+    } catch (e: any) {
+      showToastMessage(`User rejected, but rejection email failed: ${e.message || e}`, "error");
+    }
   };
 
   const handleCreateUser = () => {
@@ -1591,7 +1630,7 @@ function Qp({ onLoginAs }: any){
     setShowEditModal(true);
   };
 
-  const saveEditedUser = () => {
+  const saveEditedUser = async () => {
     if (!editingUser.name.trim()) {
       alert("Name cannot be empty.");
       return;
@@ -1601,10 +1640,40 @@ function Qp({ onLoginAs }: any){
       return;
     }
 
-    const updated = users.map(u => u.id === editingUser.id ? editingUser : u);
+    const originalUser = users.find(u => u.id === editingUser.id);
+    const wasPending = originalUser && originalUser.status === "pending";
+    const isApprovedNow = editingUser.status === "approved";
+
+    let emailMessageStr = "";
+    if (wasPending && isApprovedNow) {
+      try {
+        const res = await sendEmailNotification({
+          to: editingUser.email,
+          subject: "🎉 Your Account has been Approved! - Authority Media Placement",
+          html: getEmailTemplate("approved", { name: editingUser.name, email: editingUser.email, role: editingUser.role }),
+          category: "approved"
+        });
+        if (res && res.success) {
+          if (res.mode === "simulated") {
+            emailMessageStr = ` and account approved (${res.message})`;
+          } else {
+            emailMessageStr = " and approval email notification sent successfully";
+          }
+        } else {
+          emailMessageStr = ` (warning: account approved, but email delivery failed: ${res?.error || res?.message || "Check SMTP configurations"})`;
+        }
+      } catch (err: any) {
+        emailMessageStr = ` (warning: email send failed: ${err.message || err})`;
+      }
+    }
+
+    const nextActivity = wasPending && isApprovedNow ? "Approved by Admin" : editingUser.activity;
+    const finalEditingUser = { ...editingUser, activity: nextActivity };
+
+    const updated = users.map(u => u.id === editingUser.id ? finalEditingUser : u);
     saveUsersToStorage(updated);
     setShowEditModal(false);
-    showToastMessage(`User profile for "${editingUser.name}" has been updated.`);
+    showToastMessage(`User profile for "${editingUser.name}" has been updated${emailMessageStr}.`);
   };
 
   const filteredUsers = users
