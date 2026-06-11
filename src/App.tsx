@@ -17,6 +17,191 @@ const T = React;
 const ii={"admin@authorityplacement.com":{hash:"a591025453039e5a5b536d48a1540cb8e92ab93673b42c21f2a3da804d341009",user:{role:"admin",name:"Admin",email:"admin@authorityplacement.com",id:"admin"}},"authorityplacement@gmail.com":{hash:"a591025453039e5a5b536d48a1540cb8e92ab93673b42c21f2a3da804d341009",user:{role:"admin",name:"Admin",email:"authorityplacement@gmail.com",id:"admin"}},"rajesh@adv.com":{hash:"8fd6a9c54c6f564d7042ad268351ebf1bbf9749c5bac835949bfbd0fc552816d",user:{role:"advertiser",name:"Rajesh Kumar",email:"rajesh@adv.com",id:"adv1",wallet:2500,spent:630}},"priya@pub.com":{hash:"8fd6a9c54c6f564d7042ad268351ebf1bbf9749c5bac835949bfbd0fc552816d",user:{role:"publisher",name:"Priya Sharma",email:"priya@pub.com",id:"pub1",wallet:847.5,earned:945}}},cc=["Technology","SaaS & Software","Cybersecurity","Artificial Intelligence","Blockchain & Web3","Cryptocurrency","Gaming","Mobile Apps","E-commerce","Digital Marketing","Finance & Investing","Business & Entrepreneurship","Startups","Real Estate","Insurance","Banking & Fintech","Accounting & Tax","HR & Recruitment","Supply Chain & Logistics","Retail","Health & Wellness","Mental Health","Fitness & Exercise","Nutrition & Diet","Beauty & Skincare","Fashion & Style","Parenting & Family","Relationships","Senior Living","Pets & Animals","Photography","Music & Audio","Film & TV","Art & Design","Writing & Publishing","Podcasting","Social Media","Influencer Marketing","Content Creation","Journalism","Education & E-Learning","Online Courses","Career Development","Study Abroad","Languages","Travel & Tourism","Food & Recipes","Home & Garden","Interior Design","Weddings & Events","Outdoors & Adventure","Sports & Athletics","Automotive","Luxury & Premium","Sustainability","Law & Legal","Healthcare & Medical","Architecture","Engineering","Science & Research","Politics & Government","Non-Profit & Charity","Religion & Spirituality"],p={primary:"#0F172A",accent:"#6366F1",accentLight:"#EEF2FF",accentDark:"#4338CA",success:"#10B981",successLight:"#ECFDF5",warningLight:"#FFFBEB",danger:"#EF4444",dangerLight:"#FEF2F2",muted:"#64748B",border:"#E2E8F0",bg:"#F8FAFC",text:"#0F172A",textSoft:"#475569"};
 const Js=[{id:1,domain:"techcrunch-style.com",da:78,dr:82,traffic:245e3,niche:"Technology",price:250,writingPrice:380,status:"approved",publisher:"pub1",dofollow:!0,turnaround:3,sponsoredTag:!0,homepageFeature:!0,samplePost:"https://techcrunch-style.com/sample-post",description:"Leading technology blog with a focus on startups, venture capital funding, cutting-edge software products, and global consumer electronics trends.",lifespan:"Permanent"},{id:2,domain:"healthblog.net",da:55,dr:61,traffic:89e3,niche:"Health & Wellness",price:90,writingPrice:140,status:"approved",publisher:"pub2",dofollow:!0,turnaround:5,sponsoredTag:!0,homepageFeature:!1,samplePost:"https://healthblog.net/sample",description:"A premium health and wellness publication catering to readers seeking certified advice on fitness, general nutrition plans, and organic lifestyle recipes.",lifespan:"Permanent"},{id:3,domain:"financeinsider.io",da:67,dr:71,traffic:132e3,niche:"Finance & Investing",price:160,writingPrice:240,status:"pending",publisher:"pub1",dofollow:!1,turnaround:4,sponsoredTag:!1,homepageFeature:!0,samplePost:"",description:"Providing weekly expert insights on global stock markets, emerging cryptocurrencies, investment fundamentals, and modern budget planning tools.",lifespan:"Permanent"},{id:4,domain:"travelbuzz.co",da:43,dr:48,traffic:54e3,niche:"Travel & Tourism",price:65,writingPrice:100,status:"approved",publisher:"pub3",dofollow:!0,turnaround:7,sponsoredTag:!1,homepageFeature:!1,samplePost:"https://travelbuzz.co/example",description:"An authentic travel guide run by veteran globetrotters sharing detailed country-specific itinerary plans, reviews of luxury hotels, and adventure sports recommendations.",lifespan:"1 Year"},{id:5,domain:"digitalmarkethub.com",da:72,dr:76,traffic:198e3,niche:"Digital Marketing",price:200,writingPrice:300,status:"approved",publisher:"pub2",dofollow:!0,turnaround:3,sponsoredTag:!0,homepageFeature:!0,samplePost:"https://digitalmarkethub.com/guest-example",description:"Actionable tips and deep-dives on search engine optimization (SEO), growth hacking strategies, content marketing strategies, and conversion rate optimization metrics.",lifespan:"Permanent"}];
 const Ip=[{id:"ORD-001",site:"techcrunch-style.com",advertiser:"adv1",publisher:"pub1",amount:350,commission:35,publisherEarning:315,status:"completed",date:"2026-01-01",type:"Guest Post"},{id:"ORD-002",site:"healthblog.net",advertiser:"adv2",publisher:"pub2",amount:120,commission:12,publisherEarning:108,status:"in_progress",date:"2026-03-03",type:"Sponsored Post"},{id:"ORD-003",site:"digitalmarkethub.com",advertiser:"adv1",publisher:"pub2",amount:280,commission:28,publisherEarning:252,status:"pending",date:"2026-05-05",type:"Guest Post"}];async function uc(e){const n=new TextEncoder().encode(e+"amp_salt_2024"),r=await crypto.subtle.digest("SHA-256",n);return Array.from(new Uint8Array(r)).map(o=>o.toString(16).padStart(2,"0")).join("")}async function Oo(e,t){return await uc(e)===t}
+
+// --- Premium HTML Email Templates and Logger Service ---
+export function getEmailTemplate(type: string, data: { name: string; email: string; role: string; reason?: string }) {
+  const date = new Date().toLocaleDateString("en-IN", { year: 'numeric', month: 'long', day: 'numeric' });
+  let accentColor = "#6366F1"; // Slate Indigo
+  let title = "";
+  let bodyContent = "";
+
+  if (type === "welcome_pending") {
+    accentColor = "#6366F1";
+    title = "We are reviewing your registration";
+    bodyContent = `
+      <p style="font-size: 16px; line-height: 1.6; color: #1e293b; margin-bottom: 16px;">Hello <strong>${data.name}</strong>,</p>
+      <p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
+        Thank you for registering on <strong>Authority Media Placement</strong> as an <span style="text-transform: capitalize; font-weight: bold; color: ${accentColor};">${data.role}</span>!
+      </p>
+      <div style="background-color: #f8fafc; border-left: 4px solid ${accentColor}; padding: 16px; border-radius: 6px; margin-bottom: 20px;">
+        <p style="margin: 0; font-size: 14px; color: #475569; font-weight: 500;">
+          ⏳ <strong>Account Status: Pending Editorial Review</strong>
+        </p>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #64748b; line-height: 1.5;">
+          Our administrative and editorial team reviews every application to maintain our 100% white-hat standard. Reviews typically take <strong>12 to 24 hours</strong>.
+        </p>
+      </div>
+      <p style="font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 24px;">
+        Once approved, you will receive another email letting you access your custom dashboard and begin operations immediately.
+      </p>
+    `;
+  } else if (type === "admin_alert") {
+    accentColor = "#0f172a"; // Corporate Charcoal
+    title = "🔔 New User Awaiting Admin Approval";
+    bodyContent = `
+      <p style="font-size: 16px; line-height: 1.6; color: #1e293b; margin-bottom: 16px;">Hello Admin,</p>
+      <p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
+        A new account has registered on Authority Media Placement and is awaiting your review.
+      </p>
+      <div style="background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 24px;">
+        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: bold; width: 30%;">Full Name:</td>
+            <td style="padding: 6px 0; color: #1e293b; font-weight: bold;">${data.name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: bold;">Email Address:</td>
+            <td style="padding: 6px 0; color: #1e293b;">${data.email}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: bold;">Selected Role:</td>
+            <td style="padding: 6px 0; color: #6366f1; font-weight: bold; text-transform: capitalize;">${data.role}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: bold;">Application Date:</td>
+            <td style="padding: 6px 0; color: #1e293b;">${date}</td>
+          </tr>
+        </table>
+      </div>
+      <p style="font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 24px;">
+        Please log in to the <strong>Admin Control Panel</strong> under the <strong>Users Management</strong> section to review their details, accept their registration, or reject it.
+      </p>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <a href="${typeof window !== 'undefined' ? window.location.origin : ''}/?admin=1" style="background-color: #6366F1; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Go to User Approvals Panel →</a>
+      </div>
+    `;
+  } else if (type === "approved") {
+    accentColor = "#10b981"; // Success Emerald
+    title = "🎉 Your Account has been Approved!";
+    bodyContent = `
+      <p style="font-size: 16px; line-height: 1.6; color: #1e293b; margin-bottom: 16px;">Hello <strong>${data.name}</strong>,</p>
+      <p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
+        We have fantastic news! Our administrative review of your application is complete, and your account on <strong>Authority Media Placement</strong> has been successfully <strong>APPROVED</strong>.
+      </p>
+      <div style="background-color: #ecfdf5; border-left: 4px solid ${accentColor}; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
+        <p style="margin: 0; font-size: 14px; color: #065f46; font-weight: bold;">
+          ✓ Account Type: <span style="text-transform: capitalize;">${data.role}</span> (Approved & Active)
+        </p>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #047857; line-height: 1.5;">
+          You now have complete clearance to log in, access our premium publisher catalog or list your blogs, set up your wallet funds, and coordinate orders.
+        </p>
+      </div>
+      <p style="font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 24px;">
+        Click the login button below to access your fully authorized dashboard.
+      </p>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <a href="${typeof window !== 'undefined' ? window.location.origin : ''}" style="background-color: ${accentColor}; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Access My Active Dashboard →</a>
+      </div>
+    `;
+  } else if (type === "rejected") {
+    accentColor = "#ef4444"; // Danger Rose
+    title = "Update regarding your registration";
+    bodyContent = `
+      <p style="font-size: 16px; line-height: 1.6; color: #1e293b; margin-bottom: 16px;">Hello <strong>${data.name}</strong>,</p>
+      <p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">
+        Thank you for your interest in registering on <strong>Authority Media Placement</strong> as a ${data.role}.
+      </p>
+      <p style="font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 16px;">
+        After details review by our quality control board, your application has unfortunately been <strong>declined</strong> at this time.
+      </p>
+      <div style="background-color: #fef2f2; border-left: 4px solid ${accentColor}; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
+        <p style="margin: 0; font-size: 14px; color: #991b1b; font-weight: bold;">
+          ✕ Reason for Decline: Quality Criteria Guidelines
+        </p>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #b91c1c; line-height: 1.5;">
+          ${data.reason || "We require our registered users to maintain stringent metrics regarding spam scores, legitimate corporate domains, and professional outreach credentials. We suggest improving your metrics and reapplying in the future."}
+        </p>
+      </div>
+      <p style="font-size: 13px; line-height: 1.6; color: #64748b; margin-bottom: 24px;">
+        If you feel this assessment was made in error or have any questions, you can contact our editorial office back at <a href="mailto:publishers@authorityplacement.com" style="color: #6366f1;">publishers@authorityplacement.com</a>.
+      </p>
+    `;
+  }
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f9; margin: 0; padding: 40px 10px;">
+  <table style="max-width: 600px; width: 100%; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; border-collapse: separate; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);">
+    <thead>
+      <tr style="background-color: #0f172a; text-align: center;">
+        <th style="padding: 24px;">
+          <span style="font-size: 20px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;">AUTHORITY placement</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 32px 24px; background-color: #ffffff;">
+          <div style="border-bottom: 2px solid ${accentColor}; padding-bottom: 14px; margin-bottom: 24px;">
+            <h1 style="font-size: 20px; font-weight: bold; color: #0f172a; margin: 0; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;">${title}</h1>
+          </div>
+          ${bodyContent}
+        </td>
+      </tr>
+      <tr style="background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center;">
+        <td style="padding: 24px; font-size: 12px; color: #94a3b8; line-height: 1.5;">
+          <p style="margin: 0 0 8px 0;">This email was automatically dispatched from authorityplacement.com</p>
+          <p style="margin: 0;">© 2026 authorityplacement.com · Central Editorial Office</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>`;
+}
+
+export const sendEmailNotification = async (payload: { to: string; subject: string; html: string; category: string }) => {
+  // 1. Save to Client logs for interactive mock-verification panel
+  try {
+    const logsStr = localStorage.getItem("amp_email_logs");
+    const existingLogs = logsStr ? JSON.parse(logsStr) : [];
+    const nextLog = {
+      id: "mail_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+      timestamp: new Date().toLocaleString("en-IN"),
+      to: payload.to,
+      subject: payload.subject,
+      html: payload.html,
+      category: payload.category,
+      status: "delivered"
+    };
+    localStorage.setItem("amp_email_logs", JSON.stringify([nextLog, ...existingLogs]));
+  } catch (e) {
+    console.error("Local email logging issue:", e);
+  }
+
+  // 2. Transmit request over network to Nodemailer backend API
+  try {
+    const res = await fetch("/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        to: payload.to,
+        subject: payload.subject,
+        html: payload.html
+      })
+    });
+    return await res.json();
+  } catch (error) {
+    console.error("Transmission error to SMTP backend:", error);
+    return { success: false, message: "Network transmission failed" };
+  }
+};
+
 const _p=`
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1180,6 +1365,15 @@ function Qp({ onLoginAs }: any){
   const [showEditModal, setShowEditModal] = T.useState(false);
   const [toast, setToast] = T.useState<{msg: string, type: string} | null>(null);
 
+  // States for Manual User Creation
+  const [showCreateUserModal, setShowCreateUserModal] = T.useState(false);
+  const [newUserName, setNewUserName] = T.useState("");
+  const [newUserEmail, setNewUserEmail] = T.useState("");
+  const [newUserPassword, setNewUserPassword] = T.useState("");
+  const [newUserRole, setNewUserRole] = T.useState("advertiser");
+  const [newUserWallet, setNewUserWallet] = T.useState("1000");
+  const [newUserStatus, setNewUserStatus] = T.useState("approved");
+
   const showToastMessage = (msg: string, type = "success") => {
     setToast({ msg, type });
     setTimeout(() => setToast(null), 3000);
@@ -1198,42 +1392,147 @@ function Qp({ onLoginAs }: any){
     } catch{}
     
     const mergedList: any[] = [];
+    const processedIds = new Set<string>();
+    const processedEmails = new Set<string>();
     
     // Merge defaults with local overrides
     defaultList.forEach(u => {
       const override = localUsers[u.id] || localUsers[u.email.toLowerCase()];
-      if (override) {
-        mergedList.push({
-          ...u,
-          ...override,
-          wallet: override.wallet !== undefined ? Number(override.wallet) : u.wallet,
-          status: override.status || u.status || "approved"
-        });
-      } else {
-        mergedList.push(u);
-      }
+      const finalUser = override ? {
+        ...u,
+        ...override,
+        wallet: override.wallet !== undefined ? Number(override.wallet) : u.wallet,
+        status: override.status || u.status || "approved"
+      } : u;
+      
+      mergedList.push(finalUser);
+      processedIds.add(finalUser.id);
+      processedEmails.add(finalUser.email.toLowerCase());
     });
 
-    const defaultIds = new Set(defaultList.map(u => u.id));
-    const defaultEmails = new Set(defaultList.map(u => u.email.toLowerCase()));
-
-    // Add other dynamic users from local registry
+    // Add other dynamic users from local registry safely checking processed
     Object.values(localUsers).forEach((u: any) => {
-      if (u && u.id && !defaultIds.has(u.id) && !defaultEmails.has(u.email.toLowerCase())) {
-        mergedList.push({
-          id: u.id,
-          name: u.name,
-          email: u.email,
-          role: u.role,
-          wallet: u.wallet !== undefined ? Number(u.wallet) : (u.role === "advertiser" ? 1000 : 0),
-          joined: u.joined || new Date().toISOString().split("T")[0],
-          activity: u.activity || "New user",
-          status: u.status || "approved"
-        });
+      if (u && u.id && u.email) {
+        const uEmail = u.email.toLowerCase();
+        if (!processedIds.has(u.id) && !processedEmails.has(uEmail)) {
+          mergedList.push({
+            id: u.id,
+            name: u.name,
+            email: u.email,
+            role: u.role,
+            wallet: u.wallet !== undefined ? Number(u.wallet) : (u.role === "advertiser" ? 1000 : 0),
+            joined: u.joined || new Date().toISOString().split("T")[0],
+            activity: u.activity || "New user",
+            status: u.status || "approved"
+          });
+          processedIds.add(u.id);
+          processedEmails.add(uEmail);
+        }
       }
     });
 
     setUsers(mergedList);
+  };
+
+  const handleApproveUser = (u: any) => {
+    const updated = users.map(userItem => userItem.id === u.id ? { ...userItem, status: "approved", activity: "Approved by Admin" } : userItem);
+    saveUsersToStorage(updated);
+    
+    sendEmailNotification({
+      to: u.email,
+      subject: "🎉 Your Account has been Approved! - Authority Media Placement",
+      html: getEmailTemplate("approved", { name: u.name, email: u.email, role: u.role }),
+      category: "approved"
+    });
+    
+    showToastMessage(`User "${u.name}" has been approved successfully! Announcement email sent.`, "success");
+  };
+
+  const handleRejectUser = (u: any) => {
+    const reason = window.prompt("Optional: Enter decline reason for the rejection email:", "Our quality criteria requirements were not met.");
+    if (reason === null) return;
+    
+    const updated = users.map(userItem => userItem.id === u.id ? { ...userItem, status: "rejected", activity: "Declined by Admin" } : userItem);
+    saveUsersToStorage(updated);
+    
+    sendEmailNotification({
+      to: u.email,
+      subject: "Update regarding your application - Authority Media Placement",
+      html: getEmailTemplate("rejected", { name: u.name, email: u.email, role: u.role, reason }),
+      category: "rejected"
+    });
+    
+    showToastMessage(`User "${u.name}" was rejected. Notification email sent.`, "error");
+  };
+
+  const handleCreateUser = () => {
+    if (!newUserName.trim() || !newUserEmail.trim() || !newUserPassword.trim()) {
+      alert("All fields are required to create a user.");
+      return;
+    }
+    if (!newUserEmail.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    const emailKey = newUserEmail.toLowerCase().trim();
+    let localUsers: any = {};
+    try {
+      localUsers = JSON.parse(localStorage.getItem("amp_users") || "{}");
+    } catch {}
+
+    const isExist = users.some(u => u.email.toLowerCase() === emailKey) || localUsers[emailKey];
+    if (isExist) {
+      alert("An account with this email already exists on the platform.");
+      return;
+    }
+
+    const nextUser = {
+      id: "user_" + Date.now(),
+      name: newUserName.trim(),
+      email: emailKey,
+      role: newUserRole,
+      password: newUserPassword,
+      wallet: parseFloat(newUserWallet) || 0,
+      status: newUserStatus,
+      joined: new Date().toISOString().split("T")[0],
+      activity: "Manually registered by Admin"
+    };
+
+    localUsers[emailKey] = nextUser;
+    localUsers[nextUser.id] = nextUser;
+    localStorage.setItem("amp_users", JSON.stringify(localUsers));
+
+    // Instant notifications during direct creation
+    if (newUserStatus === "pending") {
+      sendEmailNotification({
+        to: emailKey,
+        subject: "Welcome to Authority Media Placement - Review Pending",
+        html: getEmailTemplate("welcome_pending", { name: newUserName.trim(), email: emailKey, role: newUserRole }),
+        category: "welcome"
+      });
+      sendEmailNotification({
+        to: "admin@authorityplacement.com",
+        subject: "🔔 New Sign Up Alert: Review Required",
+        html: getEmailTemplate("admin_alert", { name: newUserName.trim(), email: emailKey, role: newUserRole }),
+        category: "admin_alert"
+      });
+    } else if (newUserStatus === "approved") {
+      sendEmailNotification({
+        to: emailKey,
+        subject: "🎉 Your Account has been Approved! - Authority Media Placement",
+        html: getEmailTemplate("approved", { name: newUserName.trim(), email: emailKey, role: newUserRole }),
+        category: "approved"
+      });
+    }
+
+    loadUsersList();
+    setShowCreateUserModal(false);
+    setNewUserName("");
+    setNewUserEmail("");
+    setNewUserPassword("");
+    setNewUserWallet(newUserRole === "advertiser" ? "1000" : "0");
+    showToastMessage(`User "${newUserName}" was manually created successfully!`, "success");
   };
 
   T.useEffect(() => {
@@ -1336,8 +1635,22 @@ function Qp({ onLoginAs }: any){
             ]
           }),
           l.jsxs("div", {
-            style: { display: "flex", gap: 8 },
+            style: { display: "flex", gap: 10, alignItems: "center" },
             children: [
+              l.jsx("button", {
+                className: "btn btn-primary",
+                style: { display: "flex", alignItems: "center", gap: 6, fontWeight: 700, padding: "8px 16px" },
+                onClick: () => {
+                  setNewUserName("");
+                  setNewUserEmail("");
+                  setNewUserPassword("Demo@1234");
+                  setNewUserRole("advertiser");
+                  setNewUserWallet("1000");
+                  setNewUserStatus("approved");
+                  setShowCreateUserModal(true);
+                },
+                children: "+ Add User"
+              }),
               l.jsxs("span", {
                 className: "badge badge-info",
                 children: [users.filter(u => u.role === "advertiser").length, " advertisers"]
@@ -1477,12 +1790,24 @@ function Qp({ onLoginAs }: any){
                         children: l.jsxs("div", {
                           style: { display: "flex", gap: 6 },
                           children: [
+                            u.status === "pending" && l.jsx("button", {
+                              className: "btn btn-sm btn-success",
+                              style: { background: p.success, color: "white", fontWeight: 700, border: "none", cursor: "pointer" },
+                              onClick: () => handleApproveUser(u),
+                              children: "✓ Approve"
+                            }),
+                            u.status === "pending" && l.jsx("button", {
+                              className: "btn btn-sm btn-danger",
+                              style: { background: p.danger, color: "white", fontWeight: 700, border: "none", cursor: "pointer" },
+                              onClick: () => handleRejectUser(u),
+                              children: "✕ Reject"
+                            }),
                             l.jsx("button", {
                               className: "btn btn-sm btn-outline",
                               onClick: () => handleEditClick(u),
                               children: "Edit"
                             }),
-                            u.role !== "admin" && l.jsx("button", {
+                            u.role !== "admin" && u.status !== "pending" && l.jsx("button", {
                               className: "btn btn-sm",
                               style: {
                                 color: p.accent,
@@ -1494,7 +1819,7 @@ function Qp({ onLoginAs }: any){
                               onClick: () => onLoginAs && onLoginAs(u),
                               children: "Access Panel 🔑"
                             }),
-                            l.jsx("button", {
+                            u.status !== "pending" && l.jsx("button", {
                               className: "btn btn-sm",
                               style: {
                                 background: u.status === "banned" ? p.successLight : p.dangerLight,
@@ -1607,6 +1932,124 @@ function Qp({ onLoginAs }: any){
                     children: [
                       l.jsx("button", { className: "btn btn-primary", style: { flex: 1 }, onClick: saveEditedUser, children: "Save Changes" }),
                       l.jsx("button", { className: "btn btn-outline", onClick: () => setShowEditModal(false), children: "Cancel" })
+                    ]
+                  })
+                ]
+              })
+            ]
+          })
+        })
+      ),
+      showCreateUserModal && (
+        l.jsx("div", {
+          className: "modal-overlay",
+          onClick: e => e.target === e.currentTarget && setShowCreateUserModal(false),
+          children: l.jsxs("div", {
+            className: "modal",
+            style: { maxWidth: 460 },
+            children: [
+              l.jsxs("div", {
+                className: "modal-header",
+                children: [
+                  l.jsx("span", { className: "modal-title", children: "➕ Manually Create User Account" }),
+                  l.jsx("button", { className: "btn btn-ghost btn-sm", onClick: () => setShowCreateUserModal(false), children: "✕" })
+                ]
+              }),
+              l.jsxs("div", {
+                className: "modal-body",
+                children: [
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Full Name" }),
+                      l.jsx("input", {
+                        className: "input",
+                        placeholder: "John Doe",
+                        value: newUserName,
+                        onChange: e => setNewUserName(e.target.value)
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Email Address" }),
+                      l.jsx("input", {
+                        className: "input",
+                        type: "email",
+                        placeholder: "john@example.com",
+                        value: newUserEmail,
+                        onChange: e => setNewUserEmail(e.target.value)
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Password" }),
+                      l.jsx("input", {
+                        className: "input",
+                        type: "password",
+                        placeholder: "Demo@1234",
+                        value: newUserPassword,
+                        onChange: e => setNewUserPassword(e.target.value)
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Account Role" }),
+                      l.jsxs("select", {
+                        className: "select",
+                        value: newUserRole,
+                        onChange: e => {
+                          const roleVal = e.target.value;
+                          setNewUserRole(roleVal);
+                          setNewUserWallet(roleVal === "advertiser" ? "1000" : "0");
+                        },
+                        children: [
+                          l.jsx("option", { value: "advertiser", children: "Advertiser (📣 Buy Links)" }),
+                          l.jsx("option", { value: "publisher", children: "Publisher (🌐 Sell Links)" }),
+                          l.jsx("option", { value: "admin", children: "Administrator (⚙️ Admin Panel)" })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Initial Wallet Balance ($)" }),
+                      l.jsx("input", {
+                        className: "input",
+                        type: "number",
+                        step: "0.01",
+                        placeholder: "1000",
+                        value: newUserWallet,
+                        onChange: e => setNewUserWallet(e.target.value)
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "form-group",
+                    children: [
+                      l.jsx("label", { className: "label", children: "Account Approval Status" }),
+                      l.jsxs("select", {
+                        className: "select",
+                        value: newUserStatus,
+                        onChange: e => setNewUserStatus(e.target.value),
+                        children: [
+                          l.jsx("option", { value: "approved", children: "✅ Active / Instant Approved" }),
+                          l.jsx("option", { value: "pending", children: "⏳ Review Required (Sends Welcome Notification)" })
+                        ]
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    style: { display: "flex", gap: 10, marginTop: 24 },
+                    children: [
+                      l.jsx("button", { className: "btn btn-primary", style: { flex: 1 }, onClick: handleCreateUser, children: "Add Account Manually" }),
+                      l.jsx("button", { className: "btn btn-outline", onClick: () => setShowCreateUserModal(false), children: "Cancel" })
                     ]
                   })
                 ]
@@ -1761,22 +2204,29 @@ function Xi({ onLogin, onClose, defaultTab, defaultRole }: any) {
         id: "user_" + Date.now(),
         password: password,
         wallet: role === "advertiser" ? 1000 : 0,
-        status: "approved",
+        status: "pending",
         joined: new Date().toISOString().split("T")[0],
-        activity: "New user",
+        activity: "Pending Verification Review",
       };
       existing[email.toLowerCase()] = newRecord;
       localStorage.setItem("amp_users", JSON.stringify(existing));
-      onLogin({
-        role,
-        name: fullName.trim(),
-        email: email.trim(),
-        id: newRecord.id,
-        wallet: newRecord.wallet,
-        status: newRecord.status,
-        joined: newRecord.joined,
-        activity: newRecord.activity,
+
+      // Trigger signup notifications
+      sendEmailNotification({
+        to: email.trim().toLowerCase(),
+        subject: "Welcome to Authority Media Placement - Review Pending",
+        html: getEmailTemplate("welcome_pending", { name: fullName.trim(), email: email.trim().toLowerCase(), role }),
+        category: "welcome"
       });
+
+      sendEmailNotification({
+        to: "admin@authorityplacement.com",
+        subject: "🔔 New Sign Up Alert: Review Required",
+        html: getEmailTemplate("admin_alert", { name: fullName.trim(), email: email.trim().toLowerCase(), role }),
+        category: "admin_alert"
+      });
+
+      setTab("registration_success");
     }
   };
 
@@ -1847,275 +2297,308 @@ function Xi({ onLogin, onClose, defaultTab, defaultRole }: any) {
 
         {/* Form Body */}
         <div style={{ padding: "24px 28px 28px" }}>
-          {/* Tabs */}
-          <div style={{ display: "flex", background: "#F1F5F9", borderRadius: 10, padding: 4, marginBottom: 20 }}>
-            {["login", "signup"].map(tName => (
-              <button
-                key={tName}
-                onClick={() => {
-                  setTab(tName);
-                  setError("");
-                  setAttempts(0);
-                }}
-                style={{
-                  flex: 1,
-                  padding: "8px",
-                  borderRadius: 7,
-                  border: "none",
-                  fontWeight: 600,
-                  fontSize: 13,
-                  cursor: "pointer",
-                  background: tab === tName ? "white" : "transparent",
-                  color: tab === tName ? p.primary : p.muted,
-                  boxShadow: tab === tName ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
-                  fontFamily: "'DM Sans',sans-serif"
-                }}
-              >
-                {tName === "login" ? "Sign In" : "Sign Up"}
-              </button>
-            ))}
-          </div>
-
-          {/* Demo Credentials */}
-          {tab === "login" && (
-            <div style={{ background: "#EEF2FF", border: "1px solid #C7D2FE", borderRadius: 10, padding: 12, marginBottom: 18, fontSize: 12 }}>
-              <div style={{ fontWeight: 700, color: "#3730A3", marginBottom: 6 }}>🔑 Demo Accounts (click to fill):</div>
-              {[
-                ["rajesh@adv.com", "Advertiser", "Demo@1234"],
-                ["priya@pub.com", "Publisher", "Demo@1234"]
-              ].map(([demoEmail, userType, demoPw]) => (
-                <div
-                  key={demoEmail}
-                  onClick={() => {
-                    setEmail(demoEmail);
-                    setPassword(demoPw);
-                    setError("");
-                  }}
-                  style={{ cursor: "pointer", color: "#4338CA", padding: "3px 0", fontWeight: 500 }}
-                >
-                  ▸ {demoEmail} <span style={{ color: p.muted, fontWeight: 400 }}>({userType}) — pw: {demoPw}</span>
+          {tab === "registration_success" ? (
+            <div style={{ textAlign: "center", padding: "12px 0 6px" }}>
+              <div style={{ fontSize: 48, marginBottom: 16 }}>📬</div>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 18, fontWeight: 800, color: p.primary, marginBottom: 12 }}>
+                Registration Submitted Successfully!
+              </h3>
+              <p style={{ fontSize: 13, color: p.textSoft, lineHeight: 1.6, marginBottom: 20 }}>
+                Welcome, <strong>{fullName}</strong>! Your application to register as an <strong style={{ textTransform: "capitalize", color: p.accent }}>{role}</strong> has been received.
+              </p>
+              
+              <div style={{ background: "#EEF2FF", border: "1px solid #C7D2FE", borderRadius: 10, padding: 14, textAlign: "left", marginBottom: 24, fontSize: 12.5, lineHeight: 1.5, color: "#3730A3" }}>
+                <div style={{ fontWeight: 700, marginBottom: 5, display: "flex", alignItems: "center", gap: 5 }}>
+                  <span>⏳</span> Account Review Pending
                 </div>
-              ))}
-            </div>
-          )}
+                To protect client backlinks and list quality, our editorial board manually reviews all applications in <strong>12-24 hours</strong>.
+              </div>
 
-          {/* Error Message */}
-          {error && (
-            <div
-              style={{
-                background: "#FEF2F2",
-                border: "1px solid #FECACA",
-                borderRadius: 8,
-                padding: "10px 14px",
-                marginBottom: 16,
-                fontSize: 13,
-                color: "#991B1B",
-                fontWeight: 500,
-                display: "flex",
-                alignItems: "center",
-                gap: 8
-              }}
-            >
-              <span>⚠️</span>
-              {error}
-            </div>
-          )}
+              <div style={{ fontSize: 13, color: p.muted, lineHeight: 1.5, marginBottom: 24 }}>
+                📧 We've sent a pending confirmation notice to <strong>{email}</strong>. You'll receive another notification once your account goes live.
+              </div>
 
-          {/* Lockout Screen */}
-          {isLocked && (
-            <div
-              style={{
-                background: "#FFF7ED",
-                border: "1px solid #FED7AA",
-                borderRadius: 8,
-                padding: "10px 14px",
-                marginBottom: 16,
-                fontSize: 13,
-                color: "#92400E",
-                fontWeight: 600,
-                textAlign: "center"
-              }}
-            >
-              🔒 Account temporarily locked. Try again in 30 seconds.
-            </div>
-          )}
-
-          {/* Fields */}
-          {tab === "signup" && (
-            <div className="form-group">
-              <label className="label">Full Name</label>
-              <input
-                className="input"
-                placeholder="Your full name"
-                value={fullName}
-                onChange={E => {
-                  setFullName(E.target.value);
-                  setError("");
-                }}
-              />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label className="label">Email Address</label>
-            <input
-              className="input"
-              type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={E => {
-                setEmail(E.target.value);
-                setError("");
-              }}
-              onKeyDown={E => E.key === "Enter" && handleLogin()}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="label">Password</label>
-            <div style={{ position: "relative" }}>
-              <input
-                className="input"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                value={password}
-                onChange={E => {
-                  setPassword(E.target.value);
-                  setError("");
-                }}
-                onKeyDown={E => E.key === "Enter" && handleLogin()}
-                style={{ paddingRight: 44 }}
-              />
               <button
-                onClick={() => setShowPassword(!showPassword)}
-                style={{
-                  position: "absolute",
-                  right: 12,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: 16,
-                  color: p.muted
-                }}
+                className="btn btn-primary"
+                style={{ width: "100%", padding: 12, borderRadius: 8, fontWeight: "bold" }}
+                onClick={onClose}
               >
-                {showPassword ? "🙈" : "👁️"}
+                Understood, Close Window
               </button>
             </div>
-            {tab === "signup" && (
-              <div style={{ fontSize: 11, color: p.muted, marginTop: 5 }}>
-                Min 6 characters required (demo rules)
-              </div>
-            )}
-          </div>
-
-          {/* Signup Type Selection */}
-          {tab === "signup" && (
-            <div className="form-group">
-              <label className="label">I want to</label>
-              <div style={{ display: "flex", gap: 8 }}>
-                {[
-                  ["advertiser", "📣 Buy Links"],
-                  ["publisher", "🌐 Sell Links"]
-                ].map(([rVal, rLabel]) => (
+          ) : (
+            <>
+              {/* Tabs */}
+              <div style={{ display: "flex", background: "#F1F5F9", borderRadius: 10, padding: 4, marginBottom: 20 }}>
+                {["login", "signup"].map(tName => (
                   <button
-                    key={rVal}
-                    onClick={() => setRole(rVal)}
+                    key={tName}
+                    onClick={() => {
+                      setTab(tName);
+                      setError("");
+                      setAttempts(0);
+                    }}
                     style={{
                       flex: 1,
-                      padding: "10px",
-                      borderRadius: 8,
-                      border: `2px solid ${role === rVal ? p.accent : p.border}`,
-                      background: role === rVal ? p.accentLight : "white",
-                      color: role === rVal ? p.accent : p.muted,
+                      padding: "8px",
+                      borderRadius: 7,
+                      border: "none",
                       fontWeight: 600,
                       fontSize: 13,
                       cursor: "pointer",
+                      background: tab === tName ? "white" : "transparent",
+                      color: tab === tName ? p.primary : p.muted,
+                      boxShadow: tab === tName ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
                       fontFamily: "'DM Sans',sans-serif"
                     }}
                   >
-                    {rLabel}
+                    {tName === "login" ? "Sign In" : "Sign Up"}
                   </button>
                 ))}
               </div>
-            </div>
-          )}
 
-          {/* Submit */}
-          <button
-            onClick={handleLogin}
-            disabled={loading || isLocked}
-            style={{
-              width: "100%",
-              padding: "13px",
-              background: isLocked ? "#94A3B8" : "linear-gradient(135deg, #6366F1, #4338CA)",
-              color: "white",
-              border: "none",
-              borderRadius: 10,
-              fontWeight: 700,
-              fontSize: 15,
-              cursor: isLocked ? "not-allowed" : "pointer",
-              fontFamily: "'Plus Jakarta Sans',sans-serif",
-              marginTop: 4,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8
-            }}
-          >
-            {loading ? (
-              <>
-                <span
+              {/* Demo Credentials */}
+              {tab === "login" && (
+                <div style={{ background: "#EEF2FF", border: "1px solid #C7D2FE", borderRadius: 10, padding: 12, marginBottom: 18, fontSize: 12 }}>
+                  <div style={{ fontWeight: 700, color: "#3730A3", marginBottom: 6 }}>🔑 Demo Accounts (click to fill):</div>
+                  {[
+                    ["rajesh@adv.com", "Advertiser", "Demo@1234"],
+                    ["priya@pub.com", "Publisher", "Demo@1234"]
+                  ].map(([demoEmail, userType, demoPw]) => (
+                    <div
+                      key={demoEmail}
+                      onClick={() => {
+                        setEmail(demoEmail);
+                        setPassword(demoPw);
+                        setError("");
+                      }}
+                      style={{ cursor: "pointer", color: "#4338CA", padding: "3px 0", fontWeight: 500 }}
+                    >
+                      ▸ {demoEmail} <span style={{ color: p.muted, fontWeight: 400 }}>({userType}) — pw: {demoPw}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Error Message */}
+              {error && (
+                <div
                   style={{
-                    width: 18,
-                    height: 18,
-                    border: "2px solid rgba(255,255,255,0.4)",
-                    borderTopColor: "white",
-                    borderRadius: "50%",
-                    display: "inline-block",
-                    animation: "spin 0.7s linear infinite"
+                    background: "#FEF2F2",
+                    border: "1px solid #FECACA",
+                    borderRadius: 8,
+                    padding: "10px 14px",
+                    marginBottom: 16,
+                    fontSize: 13,
+                    color: "#991B1B",
+                    fontWeight: 500,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8
                   }}
-                />
-                Verifying...
-              </>
-            ) : tab === "login" ? (
-              "Sign In to Dashboard →"
-            ) : (
-              "Create Free Account →"
-            )}
-          </button>
+                >
+                  <span>⚠️</span>
+                  {error}
+                </div>
+              )}
 
-          {/* Helper Switcher */}
-          <div style={{ textAlign: "center", marginTop: 14, fontSize: 13, color: p.muted }}>
-            {tab === "login" ? (
-              <>
-                No account?{" "}
-                <span
-                  style={{ color: p.accent, cursor: "pointer", fontWeight: 600 }}
-                  onClick={() => {
-                    setTab("signup");
-                    setError("");
+              {/* Lockout Screen */}
+              {isLocked && (
+                <div
+                  style={{
+                    background: "#FFF7ED",
+                    border: "1px solid #FED7AA",
+                    borderRadius: 8,
+                    padding: "10px 14px",
+                    marginBottom: 16,
+                    fontSize: 13,
+                    color: "#92400E",
+                    fontWeight: 600,
+                    textAlign: "center"
                   }}
                 >
-                  Sign up free
-                </span>
-              </>
-            ) : (
-              <>
-                Already have an account?{" "}
-                <span
-                  style={{ color: p.accent, cursor: "pointer", fontWeight: 600 }}
-                  onClick={() => {
-                    setTab("login");
+                  🔒 Account temporarily locked. Try again in 30 seconds.
+                </div>
+              )}
+
+              {/* Fields */}
+              {tab === "signup" && (
+                <div className="form-group">
+                  <label className="label">Full Name</label>
+                  <input
+                    className="input"
+                    placeholder="Your full name"
+                    value={fullName}
+                    onChange={E => {
+                      setFullName(E.target.value);
+                      setError("");
+                    }}
+                  />
+                </div>
+              )}
+
+              <div className="form-group">
+                <label className="label">Email Address</label>
+                <input
+                  className="input"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={E => {
+                    setEmail(E.target.value);
                     setError("");
                   }}
-                >
-                  Sign in
-                </span>
-              </>
-            )}
-          </div>
+                  onKeyDown={E => E.key === "Enter" && handleLogin()}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="label">Password</label>
+                <div style={{ position: "relative" }}>
+                  <input
+                    className="input"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={E => {
+                      setPassword(E.target.value);
+                      setError("");
+                    }}
+                    onKeyDown={E => E.key === "Enter" && handleLogin()}
+                    style={{ paddingRight: 44 }}
+                  />
+                  <button
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={{
+                      position: "absolute",
+                      right: 12,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: 16,
+                      color: p.muted
+                    }}
+                  >
+                    {showPassword ? "🙈" : "👁️"}
+                  </button>
+                </div>
+                {tab === "signup" && (
+                  <div style={{ fontSize: 11, color: p.muted, marginTop: 5 }}>
+                    Min 6 characters required (demo rules)
+                  </div>
+                )}
+              </div>
+
+              {/* Signup Type Selection */}
+              {tab === "signup" && (
+                <div className="form-group">
+                  <label className="label">I want to</label>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    {[
+                      ["advertiser", "📣 Buy Links"],
+                      ["publisher", "🌐 Sell Links"]
+                    ].map(([rVal, rLabel]) => (
+                      <button
+                        key={rVal}
+                        onClick={() => setRole(rVal)}
+                        style={{
+                          flex: 1,
+                          padding: "10px",
+                          borderRadius: 8,
+                          border: `2px solid ${role === rVal ? p.accent : p.border}`,
+                          background: role === rVal ? p.accentLight : "white",
+                          color: role === rVal ? p.accent : p.muted,
+                          fontWeight: 600,
+                          fontSize: 13,
+                          cursor: "pointer",
+                          fontFamily: "'DM Sans',sans-serif"
+                        }}
+                      >
+                        {rLabel}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                onClick={handleLogin}
+                disabled={loading || isLocked}
+                style={{
+                  width: "100%",
+                  padding: "13px",
+                  background: isLocked ? "#94A3B8" : "linear-gradient(135deg, #6366F1, #4338CA)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: 10,
+                  fontWeight: 700,
+                  fontSize: 15,
+                  cursor: isLocked ? "not-allowed" : "pointer",
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  marginTop: 4,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 8
+                }}
+              >
+                {loading ? (
+                  <>
+                    <span
+                      style={{
+                        width: 18,
+                        height: 18,
+                        border: "2px solid rgba(255,255,255,0.4)",
+                        borderTopColor: "white",
+                        borderRadius: "50%",
+                        display: "inline-block",
+                        animation: "spin 0.7s linear infinite"
+                      }}
+                    />
+                    Verifying...
+                  </>
+                ) : tab === "login" ? (
+                  "Sign In to Dashboard →"
+                ) : (
+                  "Create Free Account →"
+                )}
+              </button>
+
+              {/* Helper Switcher */}
+              <div style={{ textAlign: "center", marginTop: 14, fontSize: 13, color: p.muted }}>
+                {tab === "login" ? (
+                  <>
+                    No account?{" "}
+                    <span
+                      style={{ color: p.accent, cursor: "pointer", fontWeight: 600 }}
+                      onClick={() => {
+                        setTab("signup");
+                        setError("");
+                      }}
+                    >
+                      Sign up free
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Already have an account?{" "}
+                    <span
+                      style={{ color: p.accent, cursor: "pointer", fontWeight: 600 }}
+                      onClick={() => {
+                        setTab("login");
+                        setError("");
+                      }}
+                    >
+                      Sign in
+                    </span>
+                  </>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -2489,7 +2972,78 @@ function Xp({onLogin:e, blogs}: any){const[t,n]=T.useState(!1),[r,i]=T.useState(
 
 function qp({onLogin:e}: any){const[t,n]=T.useState("authorityplacement@gmail.com"),[r,i]=T.useState(""),[o,s]=T.useState(""),[a,u]=T.useState(!1),[d,y]=T.useState(!1),m=async()=>{if(!t){s("Email required.");return}if(!r){s("Password required.");return}u(!0),s("");const w=ii[t.toLowerCase().trim()];if(!w||w.user.role!=="admin"){u(!1),s("No admin account found with this email.");return}const N=await Oo(r,w.hash);if(u(!1),!N){s("Incorrect password. Access denied.");return}e(w.user)};return l.jsxs("div",{style:{minHeight:"100vh",background:"#0F172A",display:"flex",alignItems:"center",justifyContent:"center",padding:20},children:[l.jsx("style",{children:"@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=DM+Sans:wght@400;500&display=swap');*{box-sizing:border-box;margin:0;padding:0;}body{font-family:'DM Sans',sans-serif;}@keyframes spin{to{transform:rotate(360deg);}}"}),l.jsxs("div",{style:{background:"#1E293B",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,padding:40,width:"100%",maxWidth:420,boxShadow:"0 25px 60px rgba(0,0,0,0.5)"},children:[l.jsxs("div",{style:{textAlign:"center",marginBottom:28},children:[l.jsx(lt,{size:"md",theme:"dark"}),l.jsx("div",{style:{fontSize:12,color:"rgba(255,255,255,0.3)",marginTop:12,letterSpacing:1.5,textTransform:"uppercase"},children:"Admin Portal"})]}),l.jsxs("div",{style:{marginBottom:16},children:[l.jsx("label",{style:{display:"block",fontSize:13,fontWeight:600,color:"rgba(255,255,255,0.6)",marginBottom:6},children:"Admin Email"}),l.jsx("input",{type:"email",placeholder:"your@email.com",value:t,onChange:w=>{n(w.target.value),s("")},onKeyDown:w=>w.key==="Enter"&&m(),style:{width:"100%",padding:"12px 14px",border:"1px solid rgba(255,255,255,0.1)",borderRadius:8,fontSize:14,background:"rgba(255,255,255,0.05)",color:"white",outline:"none",fontFamily:"'DM Sans',sans-serif"}})]}),l.jsxs("div",{style:{marginBottom:20},children:[l.jsx("label",{style:{display:"block",fontSize:13,fontWeight:600,color:"rgba(255,255,255,0.6)",marginBottom:6},children:"Password"}),l.jsxs("div",{style:{position:"relative"},children:[l.jsx("input",{type:d?"text":"password",placeholder:"••••••••••••",value:r,onChange:w=>{i(w.target.value),s("")},onKeyDown:w=>w.key==="Enter"&&m(),style:{width:"100%",padding:"12px 44px 12px 14px",border:"1px solid rgba(255,255,255,0.1)",borderRadius:8,fontSize:14,background:"rgba(255,255,255,0.05)",color:"white",outline:"none",fontFamily:"'DM Sans',sans-serif"}}),l.jsx("button",{onClick:()=>y(w=>!w),style:{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,color:"rgba(255,255,255,0.3)"},children:d?"🙈":"👁️"})]})]}),o&&l.jsxs("div",{style:{background:"rgba(239,68,68,0.15)",border:"1px solid rgba(239,68,68,0.3)",borderRadius:8,padding:"10px 14px",marginBottom:16,fontSize:13,color:"#FCA5A5"},children:["🚫 ",o]}),l.jsx("button",{onClick:m,disabled:a,style:{width:"100%",padding:"13px",background:"linear-gradient(135deg,#6366F1,#4338CA)",color:"white",border:"none",borderRadius:10,fontWeight:700,fontSize:15,cursor:a?"not-allowed":"pointer",fontFamily:"'Plus Jakarta Sans',sans-serif",display:"flex",alignItems:"center",justifyContent:"center",gap:8},children:a?l.jsxs(l.Fragment,{children:[l.jsx("span",{style:{width:18,height:18,border:"2px solid rgba(255,255,255,0.4)",borderTopColor:"white",borderRadius:"50%",display:"inline-block",animation:"spin 0.7s linear infinite"}})," Verifying..."]}):"🔐 Access Admin Panel →"}),l.jsxs("div",{style:{marginTop:16,fontSize:11,color:"rgba(255,255,255,0.15)",textAlign:"center"},children:["This page is not publicly accessible. Access via ",l.jsx("code",{style:{color:"rgba(255,255,255,0.2)"},children:"/?admin=1"})]})]})]})}
 
-function Zp({ ourPaypal, setOurPaypal }: any){const[e,t]=T.useState(""),[n,r]=T.useState(""),[i,o]=T.useState(""),[s,a]=T.useState<any>(null),[paypalEmailInput, setPaypalEmailInput]=T.useState(ourPaypal || "umesh.webbuzz@gmail.com");const [scanning, setScanning] = T.useState(false);const [scanResult, setScanResult] = T.useState<any>(null);const [firewallActive, setFirewallActive] = T.useState(true);const [antiVirusShield, setAntiVirusShield] = T.useState(true);const [bruteForceActive, setBruteForceActive] = T.useState(true);const u=async()=>{if(a(null),!e||!n||!i){a({type:"error",text:"All fields are required."});return}if(n!==i){a({type:"error",text:"New passwords do not match."});return}if(n.length<8){a({type:"error",text:"Password must be at least 8 characters."});return}if(!await Oo(e,ii["admin@authorityplacement.com"].hash)){a({type:"error",text:"Current password is incorrect."});return}const y=await uc(n);a({type:"success",text:`✓ New password hash generated:
+function Zp({ ourPaypal, setOurPaypal }: any){
+  const [e,t] = T.useState("");
+  const [n,r] = T.useState("");
+  const [i,o] = T.useState("");
+  const [s,a] = T.useState<any>(null);
+  const [paypalEmailInput, setPaypalEmailInput] = T.useState(ourPaypal || "umesh.webbuzz@gmail.com");
+  const [scanning, setScanning] = T.useState(false);
+  const [scanResult, setScanResult] = T.useState<any>(null);
+  const [firewallActive, setFirewallActive] = T.useState(true);
+  const [antiVirusShield, setAntiVirusShield] = T.useState(true);
+  const [bruteForceActive, setBruteForceActive] = T.useState(true);
+
+  // States for Email Outbox Logs & Tester
+  const [emailLogs, setEmailLogs] = T.useState<any[]>([]);
+  const [selectedMail, setSelectedMail] = T.useState<any>(null);
+  const [testTo, setTestTo] = T.useState("");
+  const [testSubject, setTestSubject] = T.useState("");
+  const [testBody, setTestBody] = T.useState("");
+  const [sendingTest, setSendingTest] = T.useState(false);
+
+  const refreshLogs = () => {
+    try {
+      const logsStr = localStorage.getItem("amp_email_logs");
+      setEmailLogs(logsStr ? JSON.parse(logsStr) : []);
+    } catch {}
+  };
+
+  T.useEffect(() => {
+    refreshLogs();
+  }, []);
+
+  const handleClearLogs = () => {
+    if (window.confirm("Are you sure you want to clear all email delivery records? This is irreversible.")) {
+      localStorage.setItem("amp_email_logs", "[]");
+      refreshLogs();
+    }
+  };
+
+  const handleSendTestEmail = async () => {
+    if (!testTo.trim() || !testTo.includes("@")) {
+      alert("Please specify a valid recipient email.");
+      return;
+    }
+    setSendingTest(true);
+    try {
+      const testHtml = `
+        <div style="font-family: sans-serif; padding: 24px; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h2 style="color: #4f46e5; margin-top: 0;">🚀 SMTP System Interface Check</h2>
+          <p style="font-size: 14px; color: #334155;">Hello, this is manual self-test validation broadcast from administrative panel.</p>
+          <div style="background-color: #f8fafc; padding: 12px; border-left: 4px solid #6366f1; border-radius: 4px; font-family: monospace; font-size: 13px; margin: 16px 0;">
+            ${testBody.trim().replace(/\n/g, "<br/>") || "No custom payload text specified."}
+          </div>
+          <p style="font-size: 12px; color: #64748b; margin-bottom: 0;">If you received this message, your SMTP credentials configuration is fully valid.</p>
+        </div>
+      `;
+      await sendEmailNotification({
+        to: testTo.trim(),
+        subject: testSubject.trim() || "SMTP Outgoing Mail System Self-Test",
+        html: testHtml,
+        category: "test"
+      });
+      alert(`✓ Test email successfully sent to: ${testTo}!`);
+      setTestTo("");
+      setTestSubject("");
+      setTestBody("");
+      refreshLogs();
+    } catch (err: any) {
+      alert("Mail delivery broadcast failed: " + err.message);
+    } finally {
+      setSendingTest(false);
+    }
+  };const u=async()=>{if(a(null),!e||!n||!i){a({type:"error",text:"All fields are required."});return}if(n!==i){a({type:"error",text:"New passwords do not match."});return}if(n.length<8){a({type:"error",text:"Password must be at least 8 characters."});return}if(!await Oo(e,ii["admin@authorityplacement.com"].hash)){a({type:"error",text:"Current password is incorrect."});return}const y=await uc(n);a({type:"success",text:`✓ New password hash generated:
 
 ${y}
 
@@ -2839,7 +3393,195 @@ Copy this hash → open src/App.tsx → find ii["admin@authorityplacement.com"].
                 ]
               })
             ]
-          })
+          }),
+          l.jsxs("div", {
+            style: { display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: 20, marginTop: 20 },
+            children: [
+              l.jsxs("div", {
+                className: "card",
+                children: [
+                  l.jsxs("div", {
+                    className: "card-header",
+                    style: { display: "flex", justifyContent: "space-between", alignItems: "center" },
+                    children: [
+                      l.jsxs("span", {
+                        className: "card-title",
+                        children: ["📧 Outbox Logs & Delivery Status (", emailLogs.length, ")"]
+                      }),
+                      emailLogs.length > 0 && l.jsx("button", {
+                        className: "btn btn-ghost btn-sm",
+                        style: { color: p.danger, fontWeight: 700, border: "none", cursor: "pointer", background: "none" },
+                        onClick: handleClearLogs,
+                        children: "🗑️ Clear Logs"
+                      })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "card-body",
+                    style: { maxHeight: 420, overflowY: "auto" },
+                    children: [
+                      emailLogs.length === 0 ? l.jsxs("div", {
+                        style: { textAlign: "center", padding: "40px 20px", color: p.muted },
+                        children: [
+                          l.jsx("span", { style: { fontSize: 32 }, children: "📭" }),
+                          l.jsx("p", { style: { marginTop: 10, fontSize: 13 }, children: "No emails have been dispatched from this preview environment session yet." })
+                        ]
+                      }) : l.jsx("table", {
+                        className: "table",
+                        style: { fontSize: 13, width: "100%" },
+                        children: l.jsxs("tbody", {
+                          children: emailLogs.map((log) => l.jsxs("tr", {
+                            children: [
+                              l.jsxs("td", {
+                                style: { whiteSpace: "nowrap" },
+                                children: [
+                                  l.jsx("strong", { style: { display: "block" }, children: log.to }),
+                                  l.jsx("span", { style: { fontSize: 11, color: p.muted }, children: log.timestamp })
+                                ]
+                              }),
+                              l.jsx("td", {
+                                children: l.jsxs("div", {
+                                  style: { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap", maxWidth: 220 },
+                                  children: [
+                                    l.jsx("span", {
+                                      className: `badge ${log.category === "approved" ? "badge-success" : log.category === "rejected" ? "badge-danger" : "badge-info"}`,
+                                      style: { marginRight: 6, fontSize: 10, padding: "2px 6px" },
+                                      children: log.category || "sys"
+                                    }),
+                                    log.subject
+                                  ]
+                                })
+                              }),
+                              l.jsx("td", {
+                                children: l.jsx("span", {
+                                  className: "badge badge-success",
+                                  style: { fontSize: 10, padding: "2px 6px" },
+                                  children: "✓ Sent"
+                                })
+                              }),
+                              l.jsx("td", {
+                                style: { textAlign: "right" },
+                                children: l.jsx("button", {
+                                  className: "btn btn-sm btn-outline",
+                                  onClick: () => setSelectedMail(log),
+                                  children: "👁️ Preview"
+                                })
+                              })
+                            ]
+                          }, log.id))
+                        })
+                      })
+                    ]
+                  })
+                ]
+              }),
+              l.jsxs("div", {
+                className: "card",
+                children: [
+                  l.jsx("div", {
+                    className: "card-header",
+                    children: l.jsx("span", { className: "card-title", children: "🚀 Live SMTP Test Dispatch Console" })
+                  }),
+                  l.jsxs("div", {
+                    className: "card-body",
+                    children: [
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "Test Recipient Email" }),
+                          l.jsx("input", {
+                            className: "input",
+                            placeholder: "your-email@example.com",
+                            value: testTo,
+                            onChange: d => setTestTo(d.target.value)
+                          })
+                        ]
+                      }),
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "Message Subject" }),
+                          l.jsx("input", {
+                            className: "input",
+                            placeholder: "Test notification from AMP Server",
+                            value: testSubject,
+                            onChange: d => setTestSubject(d.target.value)
+                          })
+                        ]
+                      }),
+                      l.jsxs("div", {
+                        className: "form-group",
+                        children: [
+                          l.jsx("label", { className: "label", children: "Body Plaintext Content" }),
+                          l.jsx("textarea", {
+                            className: "input",
+                            rows: 3,
+                            placeholder: "Write some testing lines here...",
+                            style: { height: "auto", resize: "vertical", padding: "10px" },
+                            value: testBody,
+                            onChange: d => setTestBody(d.target.value)
+                          })
+                        ]
+                      }),
+                      l.jsx("button", {
+                        className: "btn btn-primary",
+                        style: { width: "100%", fontWeight: 700, cursor: sendingTest ? "not-allowed" : "pointer" },
+                        disabled: sendingTest,
+                        onClick: handleSendTestEmail,
+                        children: sendingTest ? "Transmitting over SMTP..." : "⚡ Send Outbox Test Email"
+                      })
+                    ]
+                  })
+                ]
+              })
+            ]
+          }),
+          selectedMail && (
+            l.jsx("div", {
+              className: "modal-overlay",
+              onClick: d => d.target === d.currentTarget && setSelectedMail(null),
+              children: l.jsxs("div", {
+                className: "modal",
+                style: { maxWidth: 650 },
+                children: [
+                  l.jsxs("div", {
+                    className: "modal-header",
+                    children: [
+                      l.jsxs("span", {
+                        className: "modal-title",
+                        children: ["✉️ Mail Delivery Preview — ", selectedMail.subject]
+                      }),
+                      l.jsx("button", { className: "btn btn-ghost btn-sm", onClick: () => setSelectedMail(null), children: "✕" })
+                    ]
+                  }),
+                  l.jsxs("div", {
+                    className: "modal-body",
+                    children: [
+                      l.jsxs("div", {
+                        style: { display: "grid", gridTemplateColumns: "80px 1fr", gap: 10, fontSize: 12, borderBottom: "1px solid #E2E8F0", paddingBottom: 10, marginBottom: 15 },
+                        children: [
+                          l.jsx("span", { style: { color: p.muted, fontWeight: "bold" }, children: "Recipient:" }),
+                          l.jsx("span", { children: selectedMail.to }),
+                          l.jsx("span", { style: { color: p.muted, fontWeight: "bold" }, children: "Sent On:" }),
+                          l.jsx("span", { children: selectedMail.timestamp }),
+                          l.jsx("span", { style: { color: p.muted, fontWeight: "bold" }, children: "Category:" }),
+                          l.jsx("span", { children: selectedMail.category || "system" })
+                        ]
+                      }),
+                      l.jsx("div", {
+                        style: { border: "1px solid #E2E8F0", borderRadius: 8, overflow: "hidden", background: "white" },
+                        children: l.jsx("iframe", {
+                          srcDoc: selectedMail.html,
+                          style: { width: "100%", height: 350, border: "none" },
+                          title: "Mail Body HTML representation frame"
+                        })
+                      })
+                    ]
+                  })
+                ]
+              })
+            })
+          )
         ]
       })
     ]

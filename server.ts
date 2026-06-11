@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -20,6 +21,71 @@ const ai = new GoogleGenAI({
 });
 
 app.use(express.json());
+
+// Lazy initialize Nodemailer transporter to prevent startup crashes when SMTP variables are not set
+let transporter: any = null;
+function getTransporter() {
+  if (transporter) return transporter;
+
+  const host = process.env.SMTP_HOST;
+  const port = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (host && user && pass) {
+    try {
+      console.log(`Initializing Nodemailer SMTP transport: ${host}:${port}`);
+      transporter = nodemailer.createTransport({
+        host,
+        port,
+        secure: port === 465,
+        auth: {
+          user,
+          pass,
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+    } catch (e) {
+      console.error("Failed to create Nodemailer transport:", e);
+    }
+  }
+  return transporter;
+}
+
+// API: Send signup and notification emails
+app.post("/api/send-email", async (req, res) => {
+  try {
+    const { to, subject, html } = req.body;
+    if (!to || !subject || !html) {
+      return res.status(400).json({ error: "Required fields: to, subject, html" });
+    }
+
+    const t = getTransporter();
+    if (t) {
+      const fromAddress = process.env.SMTP_FROM || '"Authority Media Placement" <noreply@authorityplacement.com>';
+      await t.sendMail({
+        from: fromAddress,
+        to,
+        subject,
+        html,
+      });
+      console.log(`REAL email sent to ${to} with subject: ${subject}`);
+      return res.json({ success: true, mode: "smtp", message: `Email successfully sent to ${to} via SMTP.` });
+    } else {
+      console.log(`SIMULATED email to ${to}\nSubject: ${subject}\nSMTP is not configured yet in .env.`);
+      return res.json({
+        success: true,
+        mode: "simulated",
+        message: `SMTP not configured. Email logged in Admin Panel Outbox for testing. Send to: ${to}`,
+      });
+    }
+  } catch (error: any) {
+    console.error("Nodemailer error:", error);
+    return res.status(500).json({ error: error.message || "Failed to deliver email" });
+  }
+});
 
 // API: Generate a professional press release draft
 app.post("/api/generate-draft", async (req, res) => {
