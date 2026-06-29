@@ -1,0 +1,37 @@
+{
+  "sites": [],
+  "orders": [],
+  "chats": [],
+  "settings": {
+    "ourPaypal": "umesh.webbuzz@gmail.com",
+    "adminEmail": "authorityplacement@gmail.com",
+    "googleChatWebhookUrl": "",
+    "emailNotificationsActive": true,
+    "googleChatNotificationsActive": false
+  },
+  "files": [],
+  "blogs": [
+    {
+      "id": "1",
+      "title": "Why High DA/DR Placement Beats Volume Campaigns in 2026",
+      "slug": "quality-vs-volume-backlinks",
+      "summary": "Modern SEO search updates penalize massive spammy link building. Discover why single high Domain Authority listings pull 10x organic gravity.",
+      "content": "<h2>The Paradigm Shift in organic visibility</h2>\n      <p>Building hundreds of low-grade directory and blog-comment links is no longer a viable growth mechanism. In fact, search engines actively deprioritize sites utilizing volume-heavy strategies, identifying them as unnatural patterns.</p>\n      <h3>What is Domain Authority (DA) & Domain Rating (DR)?</h3>\n      <p>DA and DR are proprietary indicators engineered by Moz and Ahrefs respectively. They predict how likely a website is to rank on organic results lists. Higher authority on placing outlets directly transmits editorial weight back to your target pages.</p>\n      <blockquote>A single hyper-relevant backlink from an outlet with 75+ Domain Rating does more for brand authority than 500 catalog links on unindexed domains.</blockquote>\n      <h3>Best practices for 2026 placement:</h3>\n      <ul>\n        <li><strong>Niche alignment:</strong> Choose placements where the parent publication maintains overlapping focus.</li>\n        <li><strong>Dofollow dominance:</strong> Ensure your editorial links don't have rel=\"nofollow\" attributes unless specified for branding.</li>\n        <li><strong>Organic Context:</strong> Place anchors naturally inside descriptive, informative paragraphs, rather than floating in footers.</li>\n      </ul>",
+      "author": "Sarah Thompson",
+      "date": "2026-06-11",
+      "readTime": "4 min read",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "2",
+      "title": "The Step-by-Step Guide to Perfect Press Outreaches & Syndications",
+      "slug": "perfect-press-releases-guide",
+      "summary": "Learn how to format professional media pitches, structure key announcements, and capture editorial interest.",
+      "content": "<h2>Structuring a Professional Press Release</h2>\n      <p>Editors receive hundreds of pitches hourly. Your press release must be immediate, objective, and styled with strict AP style journalism constraints.</p>\n      <h3>Core Anatomy of a Pitch:</h3>\n      <ol>\n        <li><strong>The Headline:</strong> Must declare something genuinely new and compelling. Avoid marketing buzzwords like 'game-changer' or 'disruptive'.</li>\n        <li><strong>The Dateline:</strong> Clear geographical marker (e.g., SAN FRANCISCO, CA - June 12, 2026).</li>\n        <li><strong>The Lead Paragraph:</strong> Answers the 5 Ws: Who, What, Where, When, and Why in under three sentences.</li>\n        <li><strong>Supportive Body:</strong> Delivers qualitative context, expert founder quotes, and hard statistics.</li>\n        <li><strong>Boilerplate Section:</strong> A standard, neutral description of your enterprise.</li>\n        <li><strong>AP Format Checklist:</strong> Keep boilerplate brief and add real contact channels.</li>\n      </ol>",
+      "author": "Media Placement Expert",
+      "date": "2026-06-10",
+      "readTime": "6 min read",
+      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+}
